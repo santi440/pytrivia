@@ -15,7 +15,6 @@ def create_modified_file():
 
         Raises:
                 FileNotFoundError: Si el archivo de origen no se encuentra.
-                IOError: Si hay un error de entrada/salida al leer o escribir el archivo.
         """
         #Creamos las rutas del archivo de origen y el nuevo que vamos a crear
         original = Path('datasets') / "Conectividad_Internet.csv"
