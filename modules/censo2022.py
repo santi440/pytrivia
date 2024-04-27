@@ -1,16 +1,12 @@
-from pathlib import Path
 import csv
 #se importan las librerías a utilizar por este módulo
 
-def create_modified_file(filename = str):
+def create_modified_file(file_route,new_file_route):
     """
-    La funcion recibe como parámetro un string el cual utilizará como pauta para nombrar el archivo que va a crear
+    La funcion recibe como parámetro las rutas de los archivos que utilizará para leer y crear
     Lee el archivo 'c2022_tp_c_resumen_adaptado.csv', toma sus datos y los pasa al nuevo archivo generado 
     agregando la columna 'Porcentaje de población en situación de calle' con sus respectivos datos numéricos.
     """
-    #Se declaran las rutas de los archivos a utilizar
-    file_route = Path('datasets')/ 'c2022_tp_c_resumen_adaptado.csv'
-    new_file_route = Path('datasets_custom')/filename
 
     #Se utiliza la sentencia "with" para manejar los archivos, aclarando el modo de abrirlos y su codificacion
     with open(file_route,'r', encoding = 'UTF-8') as base, open(new_file_route,'w', encoding = 'UTF-8') as new:
