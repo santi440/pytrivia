@@ -32,6 +32,6 @@ def create_modified_file():
                         for pos in range(4,13):
                                 if(line[pos] == '--'):
                                         line[pos] = 'NO'
-                        #Si todos los tipos son 'SI' en posee_conectividad se escribe 'SI', caso contrario se escribe 'NO'               
-                        line.append('NO') if ('NO' in line) else line.append('SI')    
+                        #Si todos los tipos son 'NO' en posee_conectividad se escribe 'NO', caso contrario se escribe 'SI'               
+                        line.append('SI') if ('SI' in line) else line.append('NO')    
                         csv_writer.writerow(line)

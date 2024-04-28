@@ -125,8 +125,8 @@ def mostrarSegunPoblacion():
     datos_censo = __leer_archivo_csv(censo)
     provincias = __filtrar_provincias_por_poblacion(ecuacion, datos_censo[2:])
     
-    datos_aeropuertos = __leer_archivo_csv(aeropuertos)
-    __agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias)
+    #datos_aeropuertos = __leer_archivo_csv(aeropuertos)
+    #__agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias)
     
     datos_lagos = __leer_archivo_csv(lagos)
     __agregar_lagos_a_provincias(datos_lagos, provincias)
@@ -138,4 +138,4 @@ def mostrarSegunPoblacion():
     
     return provincias
 
-
+print(mostrarSegunPoblacion())
