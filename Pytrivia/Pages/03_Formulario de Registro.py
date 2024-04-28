@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import date
 
 st.title("Formulario de Registro")
 
@@ -13,6 +14,14 @@ with st.form("my_form"):
     # Botón para enviar el formulario
     submitted = st.form_submit_button("Enviar")
 
+    # Chequeo de que el usuario ingrese bien los datos
     if submitted:
-        st.success("Formulario enviado con éxito!")
+        if not username or not full_name or not email:
+            st.error ("Complete todos los campos para continuar.")
+        elif not '@' in email or not '.com' in email:
+            st.error ("Ingrese un email válido.")
+        elif birth_date >= date.today():
+            st.error ("Ingrese una fecha válida.")
+        else:
+            st.success("Formulario enviado con éxito!")
         
