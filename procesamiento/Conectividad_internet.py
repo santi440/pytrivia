@@ -17,8 +17,8 @@ def create_modified_file():
                 FileNotFoundError: Si el archivo de origen no se encuentra.
         """
         #Creamos las rutas del archivo de origen y el nuevo que vamos a crear
-        original = Path('datasets') / "Conectividad_Internet.csv"
-        new = Path('datasets_custom') / "Conectividad_Internet.csv"
+        original = Path('..','datasets') / "Conectividad_Internet.csv"
+        new = Path('..','datasets_custom') / "Conectividad_Internet.csv"
 
         #Trabajamos sobre nuestros dos archivos a la par 
         with open(original,'r',encoding='utf-8') as in_file, open(new,'w',encoding='utf-8',newline="") as out_file:

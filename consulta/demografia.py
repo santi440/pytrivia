@@ -117,10 +117,10 @@ def mostrarSegunPoblacion():
     """
     ecuacion = __pedir_datos_usuario()
     
-    censo = Path('datasets') / "c2022_tp_c_resumen_adaptado.csv"
-    aeropuertos = Path('datasets') / "ar-airports.csv"
-    lagos = Path('datasets') / "lagos_arg.csv"
-    conectividad = Path('datasets_custom') / "Conectividad_Internet.csv"
+    censo = Path('..','datasets') / "c2022_tp_c_resumen_adaptado.csv"
+    aeropuertos = Path('..','datasets_custom') / "ar-airports.csv"
+    lagos = Path('..','datasets') / "lagos_arg.csv"
+    conectividad = Path('..','datasets_custom') / "Conectividad_Internet.csv"
     
     datos_censo = __leer_archivo_csv(censo)
     provincias = __filtrar_provincias_por_poblacion(ecuacion, datos_censo[2:])

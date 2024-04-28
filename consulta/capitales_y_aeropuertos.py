@@ -7,8 +7,8 @@ def aeropuertos_en_capital():
     
     Returns: None
     """
-    airports = Path('datasets') / "ar-airports.csv"
-    argentina = Path('datasets') / "ar.csv"
+    airports = Path('..','datasets') / "ar-airports.csv"
+    argentina = Path('..','datasets') / "ar.csv"
     
     with open(argentina, 'r', encoding="utf-8") as file :
         capitals = {}
