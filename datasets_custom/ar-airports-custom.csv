@@ -870,3 +870,75 @@ id,ident,type,name,latitude_deg,longitude_deg,elevation_ft,continent,country_nam
 39014,AR-0339,heliport,Sarthou S.A. Heliport,-34.3642,-58.5497,15,SA,Argentina,AR,Buenos Aires Province,AR-B,B,San Fernando,0,,,HFS,,,,25,2009-10-20T11:13:19+00:00,bajo
 38781,AR-0106,heliport,Club Nautico San Isidro Heliport,-34.4614,-58.5003,6,SA,Argentina,AR,Buenos Aires Province,AR-B,B,San Isidro,0,,,,,,,25,2009-10-20T11:13:15+00:00,bajo
 38770,AR-0095,heliport,Cerro Chapelco Heliport,-40.1981,-71.3211,4281,SA,Argentina,AR,Neuquén Province,AR-Q,Q,San Martín De Los Andes,0,,,,,,,25,2009-10-20T11:13:15+00:00,alto
+38820,AR-0145,heliport,Estancia La Candelaria Heliport,-40.0442,-71.3664,2997,SA,Argentina,AR,Neuquén Province,AR-Q,Q,San Martin De Los Andes,0,,,HCD,,,,25,2009-10-20T11:13:15+00:00,alto
+38985,AR-0310,heliport,Rancho De Montaña Heliport,-40.1525,-71.2856,3297,SA,Argentina,AR,Neuquén Province,AR-Q,Q,San Martín De Los Andes,0,,,HRM,,,,25,2009-10-20T11:13:19+00:00,alto
+38721,AR-0046,heliport,Aries Heliport,-52.6831,-68.0419,,SA,Argentina,AR,Tierra del Fuego Province,AR-V,V,Santa Cruz,0,,,HES,,,,25,2011-02-11T22:46:10+00:00,Sin altura
+38862,AR-0187,heliport,Heliplataforma Carina/Total Fina ELF,-52.7572,-67.2194,30,SA,Argentina,AR,Tierra del Fuego Province,AR-V,V,Santa Cruz,0,,,HRI,,,,25,2021-01-22T09:07:48+00:00,bajo
+38866,AR-0191,heliport,Heliplataforma/Rio Cullen-Hidra Norte Heliport,-52.8206,-68.2192,65,SA,Argentina,AR,Tierra del Fuego Province,AR-V,V,Santa Cruz,0,,,HNO,,,,25,2009-10-20T11:13:17+00:00,bajo
+38861,AR-0186,heliport,Heliplataforma Am I Heliport,-52.5192,-68.3858,98,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Santa Cruz,0,,,HAB,,,,25,2009-10-20T11:13:17+00:00,bajo
+38863,AR-0188,heliport,Heliplataforma/Am-2 Heliport,-52.5489,-68.3125,134,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Santa Cruz,0,,,HAD,,,,25,2009-10-20T11:13:17+00:00,medio
+38864,AR-0189,heliport,Heliplataforma/Am3 Heliport,-52.5228,-68.2808,134,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Santa Cruz,0,,,HAM,,,,25,2009-10-20T11:13:17+00:00,medio
+38865,AR-0190,heliport,Heliplataforma/Am5 Heliport,-52.5706,-68.2533,98,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Santa Cruz,0,,,HMQ,,,,25,2009-10-20T11:13:17+00:00,bajo
+38881,AR-0206,heliport,Isla Santa Mónica Heliport,-34.4147,-58.5072,14,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Tigre,0,,,HSM,,,,25,2009-10-20T11:13:17+00:00,bajo
+38821,AR-0146,heliport,Estancia La Chacota Heliport,-35.9133,-62.6417,295,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Trenque Lauquen,0,,,HTL,,,,25,2009-10-20T11:13:15+00:00,medio
+38958,AR-0283,heliport,Norberto Cordeiro Heliport,-31.4142,-64.4969,2036,SA,Argentina,AR,Córdoba Province,AR-X,X,Villa Carlos Paz,0,,,HAI,,,,25,2009-10-20T11:13:17+00:00,alto
+38779,AR-0104,heliport,Citefa Heliport,-34.5575,-58.5056,55,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Villa Martelli,0,,,HVM,,,,25,2009-10-20T11:13:15+00:00,bajo
+38918,AR-0243,heliport,Las Chacritas Heliport,-34.405,-58.8631,64,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Villa Rosa,0,,,HLT,,,,25,2009-10-20T11:13:17+00:00,bajo
+333823,AR-0653,closed,Tres Lagunas Airstrip,-29.372714,-62.037477,255,SA,Argentina,AR,Entre Ríos Province,AR-E,E,,0,,,,,,,0,2020-04-12T11:38:14+00:00,medio
+333806,AR-0644,closed,Elida 2 Airstrip,-28.159984,-60.475316,215,SA,Argentina,AR,Santa Fe Province,AR-S,S,,0,,,,,,,0,2020-04-09T20:32:36+00:00,medio
+333808,AR-0646,closed,El Amargo Airport,-28.742,-61.741233,249,SA,Argentina,AR,Santa Fe Province,AR-S,S,,0,,,,,,,0,2020-04-09T21:37:15+00:00,medio
+333811,AR-0649,closed,Pozo Cuadrado Airport,-28.915274,-57.050779,243,SA,Argentina,AR,Corrientes Province,AR-W,W,,0,,,,,,,0,2020-04-10T03:06:33+00:00,medio
+42898,AR-0476,heliport,Heliplataforma Equipo Modular M-10 Heliport,-52.5489,-68.3119,108,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,,0,,,HEM,,,,0,2009-10-20T11:13:21+00:00,bajo
+318509,AR-0571,heliport,D.P. El Vapor Heliport,-34.83467,-58.38498,91,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Almirante Brown,0,,,HEV,,,,0,2016-06-11T19:44:09+00:00,bajo
+42896,AR-0474,heliport,Heliplataforma Barcaza Yagana Heliport,-52.5225,-68.2806,49,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Barcaza Yagana,0,,,HBY,,,,0,2009-10-20T11:13:21+00:00,bajo
+340025,AR-0662,heliport,Madero Harbour Helipad,-34.620989,-58.360764,259,SA,Argentina,AR,Buenos Aires (Autonomous City),AR-C,C,Buenos Aires,0,,,HMG,,,,0,2021-01-22T00:36:54+00:00,medio
+42897,AR-0475,heliport,Heliplataforma Buque Skandi Patagonia Heliport,-52,-67,,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Buque Skandi,0,,,HSP,,,,0,2009-10-20T11:13:21+00:00,Sin altura
+340030,AR-0667,heliport,Heliplataforma Swiber PJW3000,-53.076495,-67.964004,118,SA,Argentina,AR,Tierra del Fuego Province,AR-V,V,Campo Vega Pleyade,0,,,HSW,,,,0,2021-01-22T11:26:59+00:00,bajo
+45153,AR-0487,heliport,Cañuelas Gas SA Heliport ,-35.0583,-58.7883,95,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Cañuelas ,0,,,HGA,,,,0,2009-10-20T11:13:21+00:00,bajo
+333810,AR-0648,closed,Dora Airport,-28.600612,-62.941232,354,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,Colonia Dora,0,,,,,,,0,2020-04-09T22:46:56+00:00,medio
+42889,AR-0467,heliport,Berrini Heliport,-31.4397,-64.3433,1811,SA,Argentina,AR,Córdoba Province,AR-X,X,Córdoba,0,,,HBR,,,,0,2009-10-20T11:13:21+00:00,alto
+318510,AR-0572,heliport,Centro Cívico Bicentenario Heliport,-31.42037,-64.173235,1306,SA,Argentina,AR,Córdoba Province,AR-X,X,Córdoba,0,,,HBI,,,,0,2016-06-11T23:48:41+00:00,alto
+45154,AR-0488,heliport,Colonia La Capilla Heliport,-34.9167,-58.2508,82,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Florencio Varela,0,,,HFV,,,,0,2009-10-20T11:13:23+00:00,bajo
+340028,AR-0665,heliport,Heliplataforma Móvil Ocean Scepter,-46.466667,-67.433333,505,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Golfo San Jorge,0,,,HOS,,,,0,2021-01-22T10:22:35+00:00,medio
+340023,AR-0660,heliport,Lar de Paz S.A. Heliport,-34.776328,-58.658291,49,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Gonzalez Catán,0,,,HGM,,,,0,2021-01-21T21:40:56+00:00,bajo
+340022,AR-0659,heliport,Hospital R. Carrillo Heliport,-32.8518,-60.709189,121,SA,Argentina,AR,Santa Fe Province,AR-S,S,Granadero Baigorria,0,,,HDR,,,,0,2021-01-21T20:52:07+00:00,bajo
+44745,AR-0072,heliport,Ituzaingo / Transener S.A. Heliport,-27.5601,-56.6568,233,SA,Argentina,AR,Corrientes Province,AR-W,W,Ituzaingo,0,,,HIT,,,,0,2009-10-20T11:13:15+00:00,medio
+42894,AR-0472,heliport,Dr. Mariano Moreno Heliport,-34.5631,-58.7903,104,SA,Argentina,AR,Buenos Aires Province,AR-B,B,José C. Paz,0,,,HMM,,,,0,2009-10-20T11:13:21+00:00,bajo
+42891,AR-0469,heliport,Casa De Lata Heliport,-39.8153,-71.1681,3221,SA,Argentina,AR,Neuquén Province,AR-Q,Q,Junín de Los andes,0,,,HDL,,,,0,2009-10-20T11:13:21+00:00,alto
+42901,AR-0479,heliport,Pernigotti Heliport,-27.7708,-64.2278,475,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,La Banda,0,,,HBD,,,,0,2009-10-20T11:13:21+00:00,medio
+42890,AR-0468,heliport,Campanopolis Heliport,-34.791746,-58.601936,19,SA,Argentina,AR,Buenos Aires Province,AR-B,B,La Matanza,0,,,HIS,,,,0,2017-07-09T07:52:51+00:00,bajo
+318511,AR-0573,heliport,Superficie Heliport,-34.90046,-57.929486,22,SA,Argentina,AR,Buenos Aires Province,AR-B,B,La Plata,0,,,HBT,,,,0,2016-06-12T06:16:41+00:00,bajo
+318513,AR-0574,heliport,C.A.P.E. Provincial Police Heliport,-29.4356,-66.8632,1760,SA,Argentina,AR,La Rioja Province,AR-F,F,La Rioja,0,,,HPL,,,,0,2016-06-12T09:45:07+00:00,alto
+42904,AR-0482,heliport,S.A.N.A. Heliport,-27.5494,-55.3336,905,SA,Argentina,AR,Misiones Province,AR-N,N,Leandro N. Alem,0,,,HLA,,,,0,2009-10-20T11:13:21+00:00,alto
+318514,AR-0575,heliport,La Reserva Heliport,-34.27045,-58.90043,19,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Los Cardales,0,,,HLR,,,,0,2016-10-05T12:16:41+00:00,bajo
+327651,AR-0642,closed,Los Juries Airport,-28.477432,-62.1226,301,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,Los Juries,0,,,,,,,0,2018-05-06T21:08:09+00:00,medio
+340024,AR-0661,heliport,Homaq Heliport,-34.557353,-59.045919,79,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Luján,0,,,HLH,,,,0,2021-01-22T00:00:58+00:00,bajo
+333814,AR-0651,closed,Malbrán,-29.356369,-62.451074,295,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,Malbrán,0,,,,,,,0,2020-04-10T03:40:38+00:00,medio
+42902,AR-0480,heliport,Policia De La Provincia De Mendoza Heliport,-32.8783,-68.8681,2646,SA,Argentina,AR,Mendoza Province,AR-M,M,Mendoza,0,,,HPD,,,,0,2009-10-20T11:13:21+00:00,alto
+348363,AR-0678,heliport,Malvinas Heroes Hospital Heliport,-34.66941,-58.74199,52,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Merlo,0,,,,,,,0,2021-10-06T11:43:30+00:00,bajo
+42892,AR-0470,heliport,San Diego Country Club Heliport,-34.600503,-58.840933,71,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Moreno,0,,,HSD,,,,0,2022-10-27T15:06:13+00:00,bajo
+42900,AR-0478,heliport,Pachón Minera Heliport,-31.7597,-70.4128,11810,SA,Argentina,AR,San Juan Province,AR-J,J,"Pachón, Calingasta",0,,,HPS,,,,0,2009-10-20T11:13:21+00:00,alto
+45156,AR-0490,heliport,Piero Vara Heliport,-34.433151,-58.972485,39,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Pilar,0,,,HPI,,,,0,2022-01-24T19:29:13+00:00,bajo
+327642,AR-0639,closed,Pinto Airport,-29.152266,-62.675025,328,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,Pinto,0,,,,,,Villa General Mitre,0,2018-05-06T13:00:31+00:00,medio
+348477,AR-0711,heliport,Puerto Belgrano Naval Base Heliport,-38.88875,-62.10864,7,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Puerto Belgrano,0,,,,,,,0,2021-10-07T15:28:54+00:00,bajo
+348452,AR-0686,closed,Río Gallegos Air Base,-51.64861,-69.20314,56,SA,Argentina,AR,Santa Cruz Province,AR-Z,Z,Río Gallegos,0,,,,,,,0,2021-10-07T12:06:42+00:00,bajo
+340027,AR-0664,heliport,Heliplataforma Oceanic Champion,-52.833333,-66.416667,66,SA,Argentina,AR,Tierra del Fuego Province,AR-V,V,Río Grande,0,,,HOC,,,,0,2021-01-22T09:50:26+00:00,bajo
+351892,AR-0731,heliport,San Fernando / Paraná Miní Heliport,-34.171068,-58.510855,16,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Río Paraná Miní,0,,,HMH,,,,0,2022-01-24T18:38:44+00:00,bajo
+327626,AR-0637,heliport,Unidad Regional II de Polcia Heliport,-32.99354,-60.674636,131,SA,Argentina,AR,Santa Fe Province,AR-S,S,Rosario,0,,,2831,,,,0,2018-05-05T17:39:33+00:00,bajo
+354551,AR-0732,heliport,Hospital helipad,-32.911775,-60.681374,,SA,Argentina,AR,Santa Fe Province,AR-S,S,Rosario,0,,,,,,,0,2022-05-23T16:43:22+00:00,Sin altura
+354556,AR-0733,heliport,PNA Heliport,-32.943861,-60.632,46,SA,Argentina,AR,Santa Fe Province,AR-S,S,Rosario,0,,,,,,,0,2022-05-23T22:12:26+00:00,bajo
+318515,AR-0576,heliport,Cooperativa de Trabajos Portuarios Limitada Heliport,-32.71915,-60.72636,29,SA,Argentina,AR,Santa Fe Province,AR-S,S,San Martín,0,,,HPT,,,,0,2016-06-12T10:59:24+00:00,bajo
+45155,AR-0489,heliport,Miguel Colombise Heliport,-33.3617,-60.2511,88,SA,Argentina,AR,Santa Fe Province,AR-S,S,San Nicolás,0,,,HSN,,,,0,2009-10-20T11:13:26+00:00,bajo
+42899,AR-0477,heliport,Metalúrgico / Miguel Colombise Heliport,-33.358949,-60.249377,88,SA,Argentina,AR,Buenos Aires Province,AR-B,B,San Nicolás de Los Arroyos,0,,,HSN,,,,0,2022-01-24T22:05:57+00:00,bajo
+45157,AR-0491,heliport,Rio Cullen II Heliplatform,-52.8364,-68.1789,127,SA,Argentina,AR,Tierra del Fuego Province,AR-V,V,Santa Cruz,0,,,HCE,,,,0,2009-10-20T11:13:30+00:00,bajo
+354557,AR-0734,closed,Santa Fé City Airport,-31.659444,-60.814722,66,SA,Argentina,AR,Santa Fe Province,AR-S,S,Santa Fé,0,,,,,https://en.wikipedia.org/wiki/Santa_F%C3%A9_Airport,SAFE,0,2022-05-23T23:14:06+00:00,bajo
+318516,AR-0577,heliport,Edificio Tribunales Helipad,-27.7813,-64.265,738,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,Santiago del Estero,0,,,HET,,,,0,2016-06-12T11:24:02+00:00,medio
+333809,AR-0647,closed,Estancia Los Pocitos Airport,-28.564387,-62.524781,350,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,Tacañitas,0,,,,,,,0,2020-04-09T22:24:41+00:00,medio
+42895,AR-0473,heliport,Estancia La Pascuala Heliport,-37.3936,-58.9661,721,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Tandil,0,,,HTD,,,,0,2009-10-20T11:13:21+00:00,medio
+318517,AR-0578,heliport,Villa La Ñata Heliport,-34.37527,-58.65576,10,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Tigre,0,,,HVA,,,,0,2016-06-12T11:39:32+00:00,bajo
+340026,AR-0663,heliport,Nordelta Heliport,-34.439664,-58.64215,16,SA,Argentina,AR,Buenos Aires Province,AR-B,B,Tigre,0,,,HNB,,,,0,2021-01-22T08:32:54+00:00,bajo
+333824,AR-0654,closed,Agrodistribuidora Airstrip,-29.220089,-61.760298,220,SA,Argentina,AR,Santa Fe Province,AR-S,S,Tostado,0,,,,,,,0,2020-04-12T12:30:36+00:00,medio
+42893,AR-0471,heliport,Dayry Partners Americas Manufacturing Argentina Sa Heliport,-32.44,-63.2289,639,SA,Argentina,AR,Córdoba Province,AR-X,X,Villa Nueva,0,,,HNE,,,,0,2009-10-20T11:13:21+00:00,medio
+333815,AR-0652,closed,Villa Unión Airport,-29.42218,-62.789526,248,SA,Argentina,AR,Santiago del Estero Province,AR-G,G,Villa Unión,0,,,,,,,0,2020-04-10T04:01:54+00:00,medio
+42903,AR-0481,heliport,Roca Heliport,-32.06,-64.7794,3444,SA,Argentina,AR,Córdoba Province,AR-X,X,Yacanto de Calamuchita,0,,,HYC,,,,0,2009-10-20T11:13:21+00:00,alto
+42905,AR-0483,heliport,Austral S.A. Heliport,-52.7386,-68.5725,290,SA,Argentina,AR,Tierra del Fuego Province,AR-V,V,Yacimiento Cañadón Alfa,0,,,HCP,,,,0,2021-10-07T11:46:03+00:00,medio
