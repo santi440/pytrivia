@@ -48,6 +48,7 @@ def __filtrar_provincias_por_poblacion(ecuacion, datos_censo):
     poblacion_filtrada = {}
     for line in datos_censo:
         if eval(ecuacion + line[1]):
+            #Guardo en el diccionario nombre de provincia y un subdiccionario con 3 listas, en principio vacias
             poblacion_filtrada[line[0]] = {
                 "aeropuertos": [],
                 "lagos": [],
@@ -65,6 +66,7 @@ def __agregar_lagos_a_provincias(datos_lagos, provincias):
     """
     for line in datos_lagos:
         ubicacion = line[1].split(" / ")
+        
         for prov in ubicacion: 
             if prov in provincias:
                 provincias[prov]["lagos"].append(line[0])
@@ -78,19 +80,27 @@ def __agregar_conectividad_a_provincias(datos_conectividad, header, provincias):
         header (list): Una lista que contiene los encabezados de los datos de conectividad.
         provincias (dict): Un diccionario que contiene las provincias a las que se agregarán los datos de conectividad.
     """
-    # En este diccionario se guardan las provincias que no tienen 
+    # En este diccionario se guardan las provincias que no tienen una representacion directa 
     correcciones = {
         "CABA": "Ciudad Autónoma de Buenos Aires",
-        "Tierra del Fuego, Antártida e Islas del Atlántico Sur": "Tierra del Fuego, Antártida e Islas del Atlántico Sur",
-        "Santiago del Estero": "Santiago del Estero"
+        "TIERRA DEL FUEGO": "Tierra del Fuego, Antártida e Islas del Atlántico Sur",
+        "SANTIAGO DEL ESTERO": "Santiago del Estero",
+        "CORDOBA": "Córdoba",
+        "TUCUMAN":"Tucumán",
+        "RIO NEGRO":"Río Negro",
+        "ENTRE RIOS":"Entre Ríos",
+        "NEUQUEN": "Neuquén"
     }
     # Función para aplicar las correcciones
     def corregir_provincia(provincia):
+        """Si el nombre de provincia esta en correcciones devuelvo el valor, sino devuelvo su version con la primera letra de cada palabra mayuscula"""
         return correcciones.get(provincia, provincia.capitalize().title())
     
     for line in datos_conectividad:
         ubicacion = corregir_provincia(line[0])
+        
         if ubicacion in provincias:
+            #Desde el 4 al 12 estan los campos de conectividad
             for i in range(4, 13):
                 if line[i] == "SI" and header[i] not in provincias[ubicacion]["tipos_conectividad"]:
                     provincias[ubicacion]["tipos_conectividad"].append(header[i])
@@ -104,6 +114,7 @@ def __agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias):
         provincias (dict): Un diccionario que contiene las provincias a las que se agregarán los datos de los aeropuertos.
     """
     for line in datos_aeropuertos:
+            #En la columna 24 del dataset custom esta el campo prov_name y en el 3 el nombre del aeropuerto
             if (line[24] in provincias):
                 provincias[line[24]]["aeropuertos"].append(line[3])
 
@@ -125,8 +136,8 @@ def mostrarSegunPoblacion():
     datos_censo = __leer_archivo_csv(censo)
     provincias = __filtrar_provincias_por_poblacion(ecuacion, datos_censo[2:])
     
-    #datos_aeropuertos = __leer_archivo_csv(aeropuertos)
-    #__agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias)
+    datos_aeropuertos = __leer_archivo_csv(aeropuertos)
+    __agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias)
     
     datos_lagos = __leer_archivo_csv(lagos)
     __agregar_lagos_a_provincias(datos_lagos, provincias)
@@ -137,5 +148,3 @@ def mostrarSegunPoblacion():
     __agregar_conectividad_a_provincias(datos_conectividad, header, provincias)
     
     return provincias
-
-print(mostrarSegunPoblacion())
