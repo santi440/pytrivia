@@ -16,6 +16,22 @@ def create_modified_file():
         Raises:
                 FileNotFoundError: Si el archivo de origen no se encuentra.
         """
+        # En este diccionario se guardan las provincias que no tienen una representacion directa
+        correcciones = {
+        "CABA": "Ciudad Autónoma de Buenos Aires",
+        "TIERRA DEL FUEGO": "Tierra del Fuego, Antártida e Islas del Atlántico Sur",
+        "SANTIAGO DEL ESTERO": "Santiago del Estero",
+        "CORDOBA": "Córdoba",
+        "TUCUMAN":"Tucumán",
+        "RIO NEGRO":"Río Negro",
+        "ENTRE RIOS":"Entre Ríos",
+        "NEUQUEN": "Neuquén"
+    }
+        # Función para aplicar las correcciones
+        def corregir_provincia(provincia):
+                """Si el nombre de provincia esta en correcciones devuelvo el valor, sino devuelvo su version con la primera letra de cada palabra mayuscula"""
+                return correcciones.get(provincia, provincia.capitalize().title())
+        
         #Creamos las rutas del archivo de origen y el nuevo que vamos a crear
         original = Path('..','datasets') / "Conectividad_Internet.csv"
         new = Path('..','datasets_custom') / "Conectividad_Internet.csv"
@@ -33,5 +49,8 @@ def create_modified_file():
                                 if(line[pos] == '--'):
                                         line[pos] = 'NO'
                         #Si todos los tipos son 'NO' en posee_conectividad se escribe 'NO', caso contrario se escribe 'SI'               
-                        line.append('SI') if ('SI' in line) else line.append('NO')    
+                        line.append('SI') if ('SI' in line) else line.append('NO')
+                        
+                        #Modifico el nombre de la provincia antes de escribir
+                        line[0] = corregir_provincia(line[0])
                         csv_writer.writerow(line)
