@@ -1,8 +1,12 @@
 def degrees_to_decimal(string_degrees):
     """
     Convierte coordenadas en formato de grados, minutos y segundos, en decimal.
-    -Argumentos: String con las coordenadas. Formato GG°MM'SS"<orientación>
-    -Retorna: Flotante con coordenadas en decimal.
+
+     Args: 
+        String con las coordenadas. Formato GG°MM'SS"<orientación>
+
+     Returns: 
+        Flotante con coordenadas en formato decimal.
     """
 
     # elimina caracteres espaciales dejando numeros y punto cardinal 
