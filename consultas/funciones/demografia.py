@@ -80,24 +80,9 @@ def __agregar_conectividad_a_provincias(datos_conectividad, header, provincias):
         header (list): Una lista que contiene los encabezados de los datos de conectividad.
         provincias (dict): Un diccionario que contiene las provincias a las que se agregarán los datos de conectividad.
     """
-    # En este diccionario se guardan las provincias que no tienen una representacion directa 
-    correcciones = {
-        "CABA": "Ciudad Autónoma de Buenos Aires",
-        "TIERRA DEL FUEGO": "Tierra del Fuego, Antártida e Islas del Atlántico Sur",
-        "SANTIAGO DEL ESTERO": "Santiago del Estero",
-        "CORDOBA": "Córdoba",
-        "TUCUMAN":"Tucumán",
-        "RIO NEGRO":"Río Negro",
-        "ENTRE RIOS":"Entre Ríos",
-        "NEUQUEN": "Neuquén"
-    }
-    # Función para aplicar las correcciones
-    def corregir_provincia(provincia):
-        """Si el nombre de provincia esta en correcciones devuelvo el valor, sino devuelvo su version con la primera letra de cada palabra mayuscula"""
-        return correcciones.get(provincia, provincia.capitalize().title())
     
     for line in datos_conectividad:
-        ubicacion = corregir_provincia(line[0])
+        ubicacion = line[0]
         
         if ubicacion in provincias:
             #Desde el 4 al 12 estan los campos de conectividad
