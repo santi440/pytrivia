@@ -99,9 +99,9 @@ def __agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias):
         provincias (dict): Un diccionario que contiene las provincias a las que se agregarán los datos de los aeropuertos.
     """
     for line in datos_aeropuertos:
-            #En la columna 24 del dataset custom esta el campo prov_name y en el 3 el nombre del aeropuerto
-            if (line[24] in provincias):
-                provincias[line[24]]["aeropuertos"].append(line[3])
+            #En la columna 23 del dataset custom esta el campo prov_name y en el 3 el nombre del aeropuerto
+            if (line[23] in provincias):
+                provincias[line[23]]["aeropuertos"].append(line[3])
 
 def mostrarSegunPoblacion():
     """
