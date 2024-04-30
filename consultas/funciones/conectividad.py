@@ -5,6 +5,11 @@ from pathlib import Path
 file_route = Path('..','datasets_custom')/'Conectividad_Internet.csv'
 
 def connectivity_type_quantities (): #Inciso 10
+    """
+    Lee un archivo CSV que contiene información sobre los diferentes tipos de conectividad en varias localidades.
+    La función cuenta la cantidad de cada tipo de conectividad que está presente en el archivo.
+    La función imprime por consola la cantidad de cada tipo de conectividad presente en el archivo.
+    """
     # Abro el archivo CSV en modo lectura
     with open(file_route, 'r', encoding = 'UTF-8') as csv_file:
         #Defino un lector de csv
@@ -25,12 +30,18 @@ def connectivity_type_quantities (): #Inciso 10
                 if value == 'SI':
                     connectivity_quantities[connectivity_type] += 1
 
-    # Retorno el diccionario con todas las cantidades de cada tipo de conectividad
-    return connectivity_quantities
+    # Imprimo el diccionario con todas las cantidades de cada tipo de conectividad
+    for connectivity_type, quantity in connectivity_quantities.items():
+        print(f'{connectivity_type}: {quantity}')
 
 
 
 def provinces_optical_fiber() : 
+    """
+    Lee un archivo CSV que contiene información sobre la disponibilidad de fibra óptica en diferentes localidades de las provincias.
+    La función identifica las provincias donde todas las localidades tienen fibra óptica.
+    La función imprime por consola el nombre de las provincias donde todas las localidades tienen fibra óptica.
+    """
     # Lista para almacenar las provincias únicas, es decir, leerlas sin que se repitan
     provinces = []
 
@@ -52,14 +63,18 @@ def provinces_optical_fiber() :
                 provinces.append(province)
                 provinces_cities[province] = optical_fiber
             elif provinces_cities[province] == 'SI':
+                # Si ya guardé la provincia, reviso si la misma tiene fibra óptica, si lo tiene, reviso si la nueva que leo tambíen posee fibra óptica
+                # En caso de tener fibra óptica esta nueva lectura, hago un continue para seguir leyendo las próximas líneas
                 if optical_fiber == 'SI':
                     continue
                 else:
+                    # Si no posee fibra óptica, actualizo el valor
                     provinces_cities[province] = optical_fiber
-        
+        print('Provincias cuya totalidad de localidades posee fibra óptica : ')
         for key in provinces_cities:
+            # Recorro las provincias guardadas e imprimo aquellas que tienen fibra óptica en la totalidad de sus localidades
             if(provinces_cities[key] == 'SI'):
-                print(key)
+                print(f'    {key}')
 
 
 
@@ -129,11 +144,12 @@ def province_capital_connectivity():
         # Obtengo la ciudad capital
         capital_city = cities[0]
         # Obtengo la información de conectividad si está disponible, sino establezco como 'Conectividad desconocida'
-        # PD : quise hacer esto con un operador ternario en el append(connectivity), pero no funcionaba y si no lo hacía de esta manera, tiraba error
+        # PD : quise hacer esto con un operador ternario en el append(connectivity), pero no funcionaba 
+        #      y si no lo hacía de esta manera, tiraba error porque en algunos casos guardaba mas de un valor en conectividad para la misma localidad
         connectivity_info = cities[1] if len(cities) > 1 else 'Conectividad desconocida'
         # Imprimo el nombre de la provincia
         print(f'Provincia: {province}')
         # Imprimo la capital de la provincia
-        print(f'  Capital: {capital_city}')
+        print(f'    Capital: {capital_city}')
         # Imprimo la información de conectividad
-        print(f'  Conectividad: {connectivity_info}')
+        print(f'    Conectividad: {connectivity_info}')
