@@ -25,5 +25,8 @@ def create_modified_file(file_route,new_file_route):
                 percentage =  (int(modified_line[4]) / int(modified_line[1])) * 100 if int(modified_line[4]) != 0 else 0
                 #Se agrega el porcentaje de personas en situación de calle (datos de la nueva columna)
                 modified_line.append(percentage)
+                #Corrijo como figura la provincia "Río Negro" por correlación con los demás datasets 
+                if modified_line[0] == 'Rio Negro':
+                     modified_line[0] = 'Río Negro'
                 writer_csv.writerow(modified_line)
                 #Escribo los datos modificados en el nuevo archivo

@@ -64,13 +64,76 @@ def provinces_optical_fiber() :
 
 
 def province_capital_connectivity():
-    file_capital = Path('..'/'datasets')/'ar.csv'
-    provinces = {}
-    with open(file_route, 'r', encoding= 'UTF-8') as csv_conec :
-        conec_reader = csv.reader(csv_conec)
+    """
+    Lee dos archivos CSV para obtener información sobre las provincias argentinas y su conectividad a Internet.
+    del primer archivo toma los datos sobre las capitales de las provincias y del segundo archivo toma información sobre la conectividad de las localidades.
+    La función identifica cuales son las capitales de las provincias y verifica si tienen información sobre coenctividad. Luego imprime un resumen de la información.
+    """
+    # Ruta del archivo que contiene información sobre las capitales y provincias
+    file_capital = Path('..', 'datasets') / 'ar.csv'
+    # Lista para almacenar las provincias
+    provinces = []
+    # Diccionario para almacenar las ciudades de cada provincia
+    provinces_cities = {}
+    # Lista para almacenar las ciudades capitales
+    capital_cities = []
 
-    with open(file_capital, 'r', encoding= 'UTF-8') as csv_ar:
+    # Abro el primer archivo para tomar la información sobre capitales y provincias
+    with open(file_capital, 'r', encoding='UTF-8') as csv_ar:
+        # Leo el archivo CSV como un diccionario para acceder a su contenido de manera más sencilla
         ar_reader = csv.DictReader(csv_ar)
+        # Itero sobre cada fila del archivo
         for row in ar_reader:
-            province = row['']
+            # Obtengo los datos de la fila
+            city = row['city']
+            capital = row['capital']
+            province = row['admin_name']
 
+            # Corrijo nombres de provincias y ciudades si es necesario (por correlación con el siguiente archivo)
+            if province == 'Buenos Aires, Ciudad Autónoma de':
+                province = 'Ciudad Autónoma de Buenos Aires'
+                city = 'Ciudad Autónoma de Buenos Aires'
+
+            # Agrego la ciudad capital a la lista si es capital
+            if capital in ['primary', 'admin']:
+                capital_cities.append(city)
+
+                # Agrego la provincia a la lista si no lo está
+                if province not in provinces:
+                    provinces.append(province)
+                    # Inicializo la lista dentro de la clave del diccionario (la provincia contiene su ciudad capital)
+                    provinces_cities[province] = [city]
+
+    # Abro el segundo archivo para agregar información sobre conectividad
+    with open(file_route, 'r', encoding='UTF-8') as csv_conec:
+        conec_reader = csv.DictReader(csv_conec) # De igual manera que el anterior,lo leo como un diccionario
+        # Itero sobre cada fila del archivo
+        for row in conec_reader:
+            province = row['Provincia']
+            city = row['Localidad']
+            connectivity = row['posee_conectividad']
+
+            # Corrijo nombres por correlación con los datos tomados del anterior archivo
+            if city == 'San Miguel de Tucumán (Est. Tucumán)':
+                city = 'San Miguel de Tucumán'
+
+            # Verifico si la ciudad es una capital y si la provincia está en la lista
+            if city in capital_cities and province in provinces:
+                # Verifico si ya se agregó la conectividad para esta capital
+                if len(provinces_cities[province]) == 1:
+                    # Agrego la información de conectividad si es válida
+                    provinces_cities[province].append(connectivity)
+
+    # Imprimo la información de las provincias y sus capitales
+    for province, cities in provinces_cities.items():
+        # Obtengo la ciudad capital
+        capital_city = cities[0]
+        # Obtengo la información de conectividad si está disponible, sino establezco como 'Conectividad desconocida'
+        # PD : quise hacer esto con un operador ternario en el append(connectivity), pero no funcionaba y si no lo hacía de esta manera, tiraba error
+        connectivity_info = cities[1] if len(cities) > 1 else 'Conectividad desconocida'
+        # Imprimo el nombre de la provincia
+        print(f'Provincia: {province}')
+        # Imprimo la capital de la provincia
+        print(f'  Capital: {capital_city}')
+        # Imprimo la información de conectividad
+        print(f'  Conectividad: {connectivity_info}')
