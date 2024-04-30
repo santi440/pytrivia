@@ -1,5 +1,51 @@
 import streamlit as st
+import csv
+import pathlib
+
 from datetime import date
+
+
+def save_form_csv(username, full_name, email, birth_date, gender):
+    path = pathlib.Path('Csv/datos_formularios.csv')
+    EMAIL = 2
+    ok = False
+    create_header = False
+
+    with path.open(mode='r', encoding='UTF-8') as file:
+        reader = csv.reader(file)
+
+        # chequea si csv esta vacio
+        if path.stat().st_size == 0:
+            create_header = True
+
+        for line in reader:
+            if line[EMAIL] == email:
+                ok = True
+                break
+        
+    if ok:
+        lines = []
+        with path.open(mode='r', encoding='UTF-8') as file:
+            reader = csv.reader(file)
+
+            for line in reader:
+                if line[EMAIL] == email:
+                    line = [username, full_name, email, birth_date, gender]
+                lines.append(line)
+
+        with path.open(mode='w', encoding='UTF-8', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerows(lines)
+    else:
+        with path.open(mode='a', encoding='UTF-8', newline='') as file:
+            writer = csv.writer(file)
+
+            if create_header:
+                header = ['Usuario', 'Nombre completo', 'Email', 'Nacimiento','Genero']
+                writer.writerow(header)
+
+            writer.writerow([username, full_name, email, birth_date, gender])
+
 
 st.title("Formulario de Registro")
 
@@ -23,5 +69,7 @@ with st.form("my_form"):
         elif birth_date >= date.today():
             st.error ("Ingrese una fecha válida.")
         else:
+            save_form_csv(username, full_name, email, birth_date, gender)
             st.success("Formulario enviado con éxito!")
+            
         
