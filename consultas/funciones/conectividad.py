@@ -109,6 +109,9 @@ def province_capital_connectivity():
                 province = 'Ciudad Autónoma de Buenos Aires'
                 city = 'Ciudad Autónoma de Buenos Aires'
 
+            if (city == 'Catamarca'):
+                city = 'San Fernando del Valle de Catamarca'
+
             # Agrego la ciudad capital a la lista si es capital
             if capital in ['primary', 'admin']:
                 capital_cities.append(city)
@@ -131,17 +134,17 @@ def province_capital_connectivity():
             # Corrijo nombres por correlación con los datos tomados del anterior archivo
             if city == 'San Miguel de Tucumán (Est. Tucumán)':
                 city = 'San Miguel de Tucumán'
+            if(city == 'San Salvador de Jujuy (Est. Jujuy)'):
+                city = 'San Salvador de Jujuy'
+
+            if(province == 'Ciudad Autónoma de Buenos Aires' and len(provinces_cities[province]) == 1):
+                city = 'Ciudad Autónoma de Buenos Aires' # Utilizo len debido a que en este dateset, la localidad 'Ciudad Autonoma de buenos aires' no existe como tal
 
             # Verifico si la ciudad es una capital y si la provincia está en la lista
-            if city in capital_cities and province in provinces:
-                # Verifico si ya se agregó la conectividad para esta capital
-                # if len(provinces_cities[province]) == 1:
-                    # Agrego la información de conectividad si es válida
-                provinces_cities[province].append(connectivity)
-                if len(provinces_cities[province]) > 2:
-                    print(row)
-
-    print (provinces_cities.items())
+            if (city in provinces_cities[province]) :
+                # Agrego la información de conectividad si es válida
+                provinces_cities[province].append(connectivity if connectivity in ('SI','NO') else 'Conectividad Desconocida')
+    
     # Imprimo la información de las provincias y sus capitales
     for province, cities in provinces_cities.items():
         # Obtengo la ciudad capital
@@ -149,10 +152,10 @@ def province_capital_connectivity():
         # Obtengo la información de conectividad si está disponible, sino establezco como 'Conectividad desconocida'
         # PD : quise hacer esto con un operador ternario en el append(connectivity), pero no funcionaba 
         #      y si no lo hacía de esta manera, tiraba error porque en algunos casos guardaba mas de un valor en conectividad para la misma localidad
-        connectivity_info = cities[1] if len(cities) > 1 else 'Conectividad desconocida'
+        connectivity_info = cities[1]
         # Imprimo el nombre de la provincia
         print(f'Provincia: {province}')
         # Imprimo la capital de la provincia
         print(f'    Capital: {capital_city}')
         # Imprimo la información de conectividad
-        print(f'    Conectividad: {connectivity_info}')
+        print(f'    Conectividad: {connectivity_info} \n')
