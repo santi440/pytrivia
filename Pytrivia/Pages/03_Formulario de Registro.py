@@ -11,16 +11,16 @@ def save_form_csv(username, full_name, email, birth_date, gender):
     try:
         with path.open(mode='r+', encoding='UTF-8', newline='') as file:
             reader = csv.reader(file)
-            rows = list(reader)
             user = [username, full_name, email, birth_date, gender]
 
-            # Encuentra y reemplaza la línea si el correo electrónico ya existe
-            for row in rows[1:]:  # Ignora la primera fila que es la cabecera
+            next (reader)
+            for row in reader:  # Ignora la primera fila que es la cabecera
                 if row[EMAIL] == email:
                     row[:] = user  # Reemplaza todos los elementos de la fila con los nuevos datos
                     break
-            else:
-                rows.append(user)  # Agrega una nueva fila si el correo electrónico no existe
+                else:
+                      
+                      # Agrega una nueva fila si el correo electrónico no existe
 
             # Escribe todo el contenido de nuevo al archivo
             file.seek(0)  # Regresa al inicio del archivo
