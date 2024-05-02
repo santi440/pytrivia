@@ -1,4 +1,3 @@
-from pathlib import Path
 import csv
 
 def __pedir_datos_usuario():
@@ -19,21 +18,28 @@ def __pedir_datos_usuario():
         else:
             print("Por favor, ingrese un número entero")
             
-def __filtrar_provincias_por_poblacion(ecuacion, datos_censo):
+def __filtrar_provincias_por_poblacion(ecuacion, censo):
     """
     Filtra las provincias según la ecuación proporcionada y los datos del censo.
 
     Args:
         ecuacion (str): La ecuación para comparar con la población de cada provincia.
-        datos_censo (list): Una lista que contiene los datos del censo, donde cada elemento es una fila.
+        censo (str): Una direccion del archivo que contiene los datos del censo.
 
     Returns:
         dict: Un diccionario que contiene las provincias que cumplen con la condición proporcionada.
     """
-    with open(ruta, 'r', encoding="utf-8") as file:
+    with open(censo, 'r', encoding="utf-8") as file:
         reader = csv.reader(file)
+        
+        #avanzo una posicion para no considerar el header
+        next(reader)
+        #avanzo una posicion para no considerar el total del pais
+        next(reader)
+        
         poblacion_filtrada = {}
-        for line in datos_censo:
+        #Leo y filtro las provincias de Argentina según la ecuacion que recibo por parametro
+        for line in reader:
             if eval(ecuacion + line[1]):
                 #Guardo en el diccionario nombre de provincia y un subdiccionario con 3 listas, en principio vacias
                 poblacion_filtrada[line[0]] = {
@@ -43,15 +49,15 @@ def __filtrar_provincias_por_poblacion(ecuacion, datos_censo):
                                 }
     return poblacion_filtrada
 
-def __agregar_lagos_a_provincias(datos_lagos, provincias):
+def __agregar_lagos_a_provincias(lagos, provincias):
     """
     Agrega lagos a las provincias correspondientes.
 
     Args:
-        datos_lagos (list): Una lista que contiene los datos de los lagos.
+        lagos (str): Una direccion del archivo que contiene los datos de los lagos.
         provincias (dict): Un diccionario que contiene las provincias a las que se agregarán los lagos.
     """
-    with open(ruta, 'r', encoding="utf-8") as file:
+    with open(lagos, 'r', encoding="utf-8") as file:
         reader = csv.reader(file)
         for line in reader:
             ubicacion = line[1].split(" / ")
@@ -60,18 +66,21 @@ def __agregar_lagos_a_provincias(datos_lagos, provincias):
                 if prov in provincias:
                     provincias[prov]["lagos"].append(line[0])
 
-def __agregar_conectividad_a_provincias(datos_conectividad, header, provincias):
+def __agregar_conectividad_a_provincias(conectividad, provincias):
     """
     Agrega información de conectividad a las provincias correspondientes.
 
     Args:
-        datos_conectividad (list): Una lista que contiene los datos de conectividad.
-        header (list): Una lista que contiene los encabezados de los datos de conectividad.
+        conectividad (str): Una direccion del archivo que contiene los datos de conectividad.
         provincias (dict): Un diccionario que contiene las provincias a las que se agregarán los datos de conectividad.
     """
-    with open(ruta, 'r', encoding="utf-8") as file:
+    with open(conectividad, 'r', encoding="utf-8") as file:
         reader = csv.reader(file)
-        for line in datos_conectividad:
+        
+        #Me quedo con los datos del encabezado para comprobar los tipos de conexión posibles
+        header = next(reader)
+        
+        for line in reader:
             ubicacion = line[0]
         
             if ubicacion in provincias:
@@ -80,25 +89,32 @@ def __agregar_conectividad_a_provincias(datos_conectividad, header, provincias):
                     if line[i] == "SI" and header[i] not in provincias[ubicacion]["tipos_conectividad"]:
                         provincias[ubicacion]["tipos_conectividad"].append(header[i])
                     
-def __agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias):
+def __agregar_aeropuertos_a_provincias(aeropuertos, provincias):
     """
     Agrega información de aeropuertos a las provincias correspondientes.
 
     Args:
-        datos_aeropuertos (list): Una lista que contiene los datos de los aeropuertos.
+        aeropuertos (str): Una direccion del archivo que contiene los datos de los aeropuertos.
         provincias (dict): Un diccionario que contiene las provincias a las que se agregarán los datos de los aeropuertos.
     """
-    with open(ruta, 'r', encoding="utf-8") as file:
+    with open(aeropuertos, 'r', encoding="utf-8") as file:
         reader = csv.reader(file)
-        for line in datos_aeropuertos:
+        
+        for line in reader:
             #En la columna 23 del dataset custom esta el campo prov_name y en el 3 el nombre del aeropuerto
             if (line[23] in provincias):
                 provincias[line[23]]["aeropuertos"].append(line[3])
 
-def mostra_segun_poblacion(censo,aeropuertos,lagos,conectividad):
+def filtrar_segun_poblacion(censo,aeropuertos,lagos,conectividad):
     """
     Muestra información sobre provincias basada en la cantidad de gente proporcionada por el usuario y el signo
     ('>' o '<') para comparar con la población de cada provincia.
+    
+    Args: 
+        censo (str): Una direccion del archivo que contiene los datos del censo.
+        aeropuertos (str): Una direccion del archivo que contiene los datos de los aeropuertos.
+        lagos (str): Una direccion del archivo que contiene los datos de los lagos.
+        conectividad (str): Una direccion del archivo que contiene los datos de los tipos de conectividad en las provincias argentinas.
     
     Returns:
         dict: Un diccionario que contiene los lagos,los tipos de conectividad y aeropuertos sobre provincias que cumplen con la condición proporcionada.
@@ -107,15 +123,10 @@ def mostra_segun_poblacion(censo,aeropuertos,lagos,conectividad):
     
     provincias = __filtrar_provincias_por_poblacion(ecuacion, censo)
     
-    datos_aeropuertos = __leer_archivo_csv(aeropuertos)
-    __agregar_aeropuertos_a_provincias(datos_aeropuertos, provincias)
+    __agregar_aeropuertos_a_provincias(aeropuertos, provincias)
     
-    datos_lagos = __leer_archivo_csv(lagos)
-    __agregar_lagos_a_provincias(datos_lagos, provincias)
+    __agregar_lagos_a_provincias(lagos, provincias)
     
-    datos_conectividad = __leer_archivo_csv(conectividad)
-    header = datos_conectividad[0]
-    datos_conectividad = datos_conectividad[1:]
-    __agregar_conectividad_a_provincias(datos_conectividad, header, provincias)
+    __agregar_conectividad_a_provincias(conectividad, provincias)
     
     return provincias

@@ -9,7 +9,7 @@ def create_modified_file(file_route,new_file_route):
     """
 
     #Se utiliza la sentencia "with" para manejar los archivos, aclarando el modo de abrirlos y su codificacion
-    with open(file_route,'r', encoding = 'UTF-8') as base, open(new_file_route,'w', encoding = 'UTF-8') as new:
+    with open(file_route,'r', encoding = 'UTF-8') as base, open(new_file_route,'w', encoding = 'UTF-8',newline="") as new:
             reader_csv = csv.reader(base)
             writer_csv = csv.writer(new)
 
