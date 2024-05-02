@@ -135,10 +135,13 @@ def province_capital_connectivity():
             # Verifico si la ciudad es una capital y si la provincia está en la lista
             if city in capital_cities and province in provinces:
                 # Verifico si ya se agregó la conectividad para esta capital
-                if len(provinces_cities[province]) == 1:
+                # if len(provinces_cities[province]) == 1:
                     # Agrego la información de conectividad si es válida
-                    provinces_cities[province].append(connectivity)
+                provinces_cities[province].append(connectivity)
+                if len(provinces_cities[province]) > 2:
+                    print(row)
 
+    print (provinces_cities.items())
     # Imprimo la información de las provincias y sus capitales
     for province, cities in provinces_cities.items():
         # Obtengo la ciudad capital
