@@ -149,9 +149,7 @@ def province_capital_connectivity():
     for province, cities in provinces_cities.items():
         # Obtengo la ciudad capital
         capital_city = cities[0]
-        # Obtengo la información de conectividad si está disponible, sino establezco como 'Conectividad desconocida'
-        # PD : quise hacer esto con un operador ternario en el append(connectivity), pero no funcionaba 
-        #      y si no lo hacía de esta manera, tiraba error porque en algunos casos guardaba mas de un valor en conectividad para la misma localidad
+        # Obtengo la información de conectividad
         connectivity_info = cities[1]
         # Imprimo el nombre de la provincia
         print(f'Provincia: {province}')
