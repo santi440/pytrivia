@@ -41,3 +41,7 @@ def aeropuertos_en_capital(airports,argentina):
         for airport in capitals[i]:
             print("     " + airport)
     
+if __name__ == "__main__":
+    airports = Path('datasets_custom') / "ar-airports-custom.csv"
+    argentina = Path('datasets') / "ar.csv"
+    aeropuertos_en_capital(airports,argentina)

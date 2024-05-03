@@ -31,3 +31,8 @@ def lakes_filter(lakes):
         for line in csv_reader:
             if line[sub_tamaño] == tam:
                 print(line[nombre_lago], end= " ")
+
+if __name__ == "__main__":
+    root = Path('datasets_custom') / "lagos_arg_custom.csv"
+    lakes_filter(root)
+    

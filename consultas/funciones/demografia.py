@@ -1,3 +1,4 @@
+from pathlib import Path
 import csv
 
 def __pedir_datos_usuario():
@@ -130,3 +131,16 @@ def filtrar_segun_poblacion(censo,aeropuertos,lagos,conectividad):
     __agregar_conectividad_a_provincias(conectividad, provincias)
     
     return provincias
+
+if __name__ == "__main__":
+    censo = Path('datasets_custom') / "Censo_Modificado.csv"
+    aeropuertos = Path('datasets_custom') / "ar-airports-custom.csv"
+    lagos = Path('datasets_custom') / "lagos_arg_custom.csv"
+    conectividad = Path('datasets_custom') / "Conectividad_Internet.csv"
+
+    provinces = filtrar_segun_poblacion(censo,aeropuertos,lagos,conectividad)
+    
+    for key, value in provinces.items():
+        print("Provincia:", key)
+        for sub_key, sub_value in value.items():
+            print("  ", sub_key, ":", sub_value)
