@@ -44,6 +44,4 @@ Además, para un análisis más exhaustivo podra pasar por los distintos archivo
 - Interfaz Gráfica: Se ha desarrollado una interfaz gráfica utilizando Streamlit.
 - Formulario de Registro: Se ha implementado un formulario de registro para que los usuarios puedan registrarse en el sistema.
 
-
 ¡Gracias por visitar nuestro repositorio! Si tiene alguna pregunta o sugerencia, no dude en comunicarse con nosotros.
-
