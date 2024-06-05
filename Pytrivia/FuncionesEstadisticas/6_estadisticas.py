@@ -1,6 +1,6 @@
 import pandas as pd
+import streamlit as st
 
-# FALTA IMPLEMENTARLO CON STREAMLIT
 
 def estadistica_6(plays_route):
     file = pd.read_csv(plays_route)
@@ -19,4 +19,5 @@ def estadistica_6(plays_route):
     themes_info = themes_info.sort_values(by='Respuestas Incorrectas', ascending=False)
 
     # Se muestra grafico
-    print(themes_info)
+    st.subheader('Temáticas ordenados por dificultad:')
+    st.write(themes_info)  
