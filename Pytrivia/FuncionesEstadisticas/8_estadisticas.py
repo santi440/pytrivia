@@ -1,6 +1,6 @@
 import pandas as pd
+import streamlit as st
 
-# FALTA IMPLEMENTARLO CON STREAMLIT
 
 def estadistica_8(plays_route, users_route):
     plays_data = pd.read_csv(plays_route)
@@ -25,4 +25,5 @@ def estadistica_8(plays_route, users_route):
     best_theme = grouped_data.groupby('Genero').first()
     
     # Imprime los resultados
-    print(best_theme)
+    st.subheader('Temática en la que cada género demuestra mayor conocimiento:')
+    st.write(best_theme)
