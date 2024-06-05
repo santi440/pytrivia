@@ -18,6 +18,6 @@ def estadistica_6(plays_route):
     # Se ordenan los elementos de manera descente a partir de la columna creada 'Respuestas Incorrectas' 
     themes_info = themes_info.sort_values(by='Respuestas Incorrectas', ascending=False)
 
-    # Se muestra grafico
+    # Se muestra 
     st.subheader('Temáticas ordenados por dificultad:')
     st.write(themes_info)  
