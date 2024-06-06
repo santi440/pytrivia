@@ -25,8 +25,8 @@ def estadistica_7(plays_route):
     user2_data = user2_data.sort_values('Fecha y hora')
 
     # Datos de los usuarios en el grafico
-    plt.plot(user1_data['Fecha y hora'], user1_data['Puntaje'], color='green')
-    plt.plot(user2_data['Fecha y hora'], user2_data['Puntaje'], color='purple')
+    plt.plot(user1_data['Fecha y hora'], user1_data['Puntos'], color='green')
+    plt.plot(user2_data['Fecha y hora'], user2_data['Puntos'], color='purple')
 
     # Titulo del grafico 
     plt.title(f'Comparación de la evolución del puntaje entre {user1} y {user2}.')
@@ -35,7 +35,7 @@ def estadistica_7(plays_route):
     plt.legend ([user1, user2]) 
 
     plt.xlabel ('Tiempo')
-    plt.ylabel ('Puntaje')
+    plt.ylabel ('Puntos')
 
     plt.xticks(rotation=45)
  

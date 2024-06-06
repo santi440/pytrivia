@@ -6,7 +6,7 @@ def estadistica_9(plays_route):
     file = pd.read_csv(plays_route)
 
     # Utilizando grupby y la funcion .mean() se obitene el promedio
-    average_difficulty = file.groupby('Dificultad')['Puntaje'].mean()
+    average_difficulty = file.groupby('Dificultad')['Puntos'].mean()
 
     # De vuelta utilizando el groupby y la funcion .size() se obtiene la cantidad de ocurrencias
     quantity_difficulty = file.groupby('Dificultad').size()
