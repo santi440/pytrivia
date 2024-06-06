@@ -3,27 +3,26 @@ import FuncionesEstadisticas as fe
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-file_game = Path('..','Pytrivia','Csv','resultado.csv')
-file_players = Path('..','Pytrivia','Csv','datos_formularios.csv')
+file_game = Path('..','Pytrivia','csv','resultado.csv')
+file_players = Path('..','Pytrivia','csv','datosformularios.csv')
 
 # Lista de opciones
-opciones = ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4', 'Opcion 6', 'Opcion 7', 'Opcion 8', 'Opcion 9']
+opciones = ['Opción 1', 'Opción 2', 'Opción 3','Opción 4', 'Opción 5', 'Opcion 6', 'Opcion 7', 'Opcion 8', 'Opcion 9']
 
 # Crear el selectbox
 opcion_seleccionada = st.selectbox('Selecciona una opción:', opciones)
 
 match opcion_seleccionada:
     case 'Opción 1':
-        grafico = fe.graficar_genero(file_game,file_players)
-        st.pyplot(plt.gcf())
+        fe.graficar_genero(file_game,file_players)    
     case 'Opción 2':
-        grafico = fe.graficar_porcentaje(file_game)
-        st.plotly_chart(grafico)
+        fe.graficar_porcentaje(file_game)
     case 'Opción 3':
-        grafico = fe.grafico_dias(file_game)
-        st.pyplot(plt.gcf())
+        fe.grafico_dias(file_game)
     case 'Opción 4':
         fe.promedio_fechas(file_game)
+    case 'Opción 5':
+        fe.mejores(file_game)
     case 'Opcion 6':
         fe.estadistica_6(file_game)
     case 'Opcion 7':

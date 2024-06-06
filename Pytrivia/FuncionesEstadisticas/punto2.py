@@ -1,3 +1,4 @@
+import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
 from pathlib import Path
@@ -18,9 +19,8 @@ def graficar_porcentaje(game):
     #hoverinfo para que se vea el porcentaje al pasar por encima 
     fig_pie = go.Figure(data=[go.Pie(labels=labels_players, values=values_players, hole=0.3,hoverinfo="label+value")])
     fig_pie.update_layout(title="Partidas que superan la media")
-    return fig_pie
+    st.plotly_chart(fig_pie)
 
 if(__name__ == "__main__"):
-    file_game = Path('Pytrivia','Csv','resultado.csv')
+    file_game = Path('Pytrivia','csv','resultado.csv')
     fig_pie=graficar_porcentaje(file_game)
-    fig_pie.show()
