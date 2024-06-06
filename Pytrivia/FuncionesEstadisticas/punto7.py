@@ -4,6 +4,14 @@ import streamlit as st
 
 
 def estadistica_7(plays_route):
+    '''
+    Pide al usario seleccionar dos usuarios y muestra gráfico que compara la evolución 
+    de puntaje entre los mismos a lo largo del tiempo.
+
+
+        Args: Recibe la ruta del dataset de jugadas.
+    '''
+
     file = pd.read_csv(plays_route)
 
     # Lista de usuarios únicos

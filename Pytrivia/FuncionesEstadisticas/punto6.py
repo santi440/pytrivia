@@ -3,6 +3,13 @@ import streamlit as st
 
 
 def estadistica_6(plays_route):
+    '''
+    Muestra los datasets ordenados por dificultad. Primero se muestra el dataset con
+    mayor numero de errores. Tambien muestra la cantidad de respuestas incorrectas de cada uno.
+
+        Args: Recibe la ruta del dataset de jugadas.
+    '''
+
     file = pd.read_csv(plays_route)
 
     # Variable con la maxima cantidad de resp correctas

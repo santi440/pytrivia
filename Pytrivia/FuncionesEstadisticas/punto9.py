@@ -3,6 +3,13 @@ import streamlit as st
 
 
 def estadistica_9(plays_route):
+    '''
+    Lista cada dificultad de juego junto con el puntaje promedio obtenido en cada una y
+    con la cantidad de veces que fue elegida.
+
+        Args: Recibe la ruta del dataset de jugadas.
+    '''
+
     file = pd.read_csv(plays_route)
 
     # Utilizando grupby y la funcion .mean() se obitene el promedio
