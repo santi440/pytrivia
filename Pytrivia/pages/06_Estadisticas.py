@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 file_game = Path('..','Pytrivia','csv','resultado.csv')
-file_players = Path('..','Pytrivia','csv','datosformularios.csv')
+file_players = Path('..','Pytrivia','csv','datos_formularios.csv')
 
 # Lista de opciones
 opciones = ['Opción 1', 'Opción 2', 'Opción 3','Opción 4', 'Opción 5', 'Opcion 6', 'Opcion 7', 'Opcion 8', 'Opcion 9', 'Opcion 10']
