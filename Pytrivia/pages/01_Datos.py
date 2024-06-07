@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib as plt
 from pathlib import Path
+from streamlit_folium import folium_static
 
 
 st.header("Conocemos nuestros datos")
@@ -19,6 +20,6 @@ option = st.selectbox("Elija que datos ver", options = ['Aeropuertos','Lagos'])
 match option:
     case 'Aeropuertos':
         mapa = func.airport_map(df_airports)
-        mapa
+        folium_static(mapa)
     case 'Lagos':
         st.write('b')

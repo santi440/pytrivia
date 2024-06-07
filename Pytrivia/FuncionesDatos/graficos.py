@@ -10,7 +10,7 @@ def _get_color (elevation):
     elif elevation == 'medio' :
         color = 'blue'
     else:
-        color = 'yellow'
+        color = 'red'
     return color
 
 def _add_marker(row,mapa):
@@ -23,15 +23,13 @@ def _add_marker(row,mapa):
 
 
 def airport_map (df_airports):
-    df_airports =  df_airports[['name','latitude_deg','longitude_deg','elevation_name']]
-    
+    df_airports = df_airports[['name','latitude_deg','longitude_deg','elevation_name']]
+    df_airports = df_airports.drop(df_airports[df_airports['elevation_name'] == 'Sin altura'].index)
+
     mapa = folium.Map(
     location=(-33.457606, -65.346857),
     control_scale=True,
     zoom_start=5
     )
-
-    df_airports.apply(_add_marker(df_airports,mapa), axis= 1)
+    df_airports.apply(lambda row: _add_marker(row, mapa), axis=1)
     return mapa
-
-    
