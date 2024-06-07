@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+import streamlit as st
 
 def grafico_dias(game):
     df = pd.read_csv(game)
@@ -30,10 +31,10 @@ def grafico_dias(game):
     plt.ylabel('Recuento de Registros')
     plt.title('Recuento de Registros por Día de la Semana')
     
-    return grafico 
+    st.pyplot(plt.gcf())
     #print(conteo_dias_semana)
 
 if(__name__ == "__main__"):
-    file_game = Path('Pytrivia','Csv','resultado.csv')
+    file_game = Path('Pytrivia','csv','resultado.csv')
     grafico_dias(file_game)
-    plt.show()
+    
