@@ -6,7 +6,7 @@ from datetime import date
 
 
 def save_form_csv(username, full_name, email, birth_date, gender):
-    path = pathlib.Path('Csv/datos_formularios.csv')
+    path = pathlib.Path('csv/datos_formularios.csv')
     EMAIL = 2
     ok = False
     create_header = False
