@@ -22,9 +22,9 @@ def _add_marker(row,mapa):
     ).add_to(mapa)
 
 
-def airport_map (df_airports):
+def airport_map (df_airports,elevation):
     df_airports = df_airports[['name','latitude_deg','longitude_deg','elevation_name']]
-    df_airports = df_airports.drop(df_airports[df_airports['elevation_name'] == 'Sin altura'].index)
+    df_airports = df_airports.drop(df_airports[df_airports['elevation_name'] != elevation].index)
 
     mapa = folium.Map(
     location=(-33.457606, -65.346857),
