@@ -21,12 +21,12 @@ st.write("""
 st.header("Datos Necesarios para Comenzar")
 st.write(f"""
     Para empezar a jugar, solo necesitas:
-    - Registrarte en la sección de {st.page_link("pages/03_Formulario_de_Registro.py", label = "Formulario de Registro")}.
+    - Registrarte en la sección de {st.page_link("pages/03_Formulario de Registro.py", label = "Formulario de Registro")}.
     """)
 
 st.header("Instrucciones Básicas")
 st.write(f"""
-    1. Regístrate en la sección de {st.page_link("pages/03_Formulario_de_Registro.py", label = "Formulario de Registro")}.
+    1. Regístrate en la sección de {st.page_link("pages/03_Formulario de Registro.py", label = "Formulario de Registro")}.
     2. Navega a la página {st.page_link("pages/02_Juego.py", label = "Juego")} haciendo click aquí o usando el menú de la izquierda.
     3. Selecciona una categoría de preguntas.
     4. Ajusta la dificultad según tu preferencia.
