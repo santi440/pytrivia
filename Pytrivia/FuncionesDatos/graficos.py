@@ -22,14 +22,22 @@ def _add_marker(row,mapa):
     ).add_to(mapa)
 
 
-def airport_map (df_airports,elevation):
+def airport_map (df_airports,elevation,mapa):
     df_airports = df_airports[['name','latitude_deg','longitude_deg','elevation_name']]
-    df_airports = df_airports.drop(df_airports[df_airports['elevation_name'] != elevation].index)
+    df_airports = df_airports.drop(df_airports[~df_airports['elevation_name'].isin(elevation)].index)
 
-    mapa = folium.Map(
-    location=(-33.457606, -65.346857),
-    control_scale=True,
-    zoom_start=5
-    )
+    
     df_airports.apply(lambda row: _add_marker(row, mapa), axis=1)
+    return mapa
+
+def _add_marker_lake(row,mapa):
+    folium.Marker(
+        [row['Latitud(GD)'], row['Longitud(GD)']],
+        popup= row['Nombre'],
+        icon= folium.Icon(color= 'cadetblue')
+    ).add_to(mapa)
+
+def lakes_map (df_lakes,mapa):
+    df_lakes = df_lakes[['Nombre','Latitud(GD)','Longitud(GD)']]
+    df_lakes.apply(lambda row: _add_marker_lake(row,mapa), axis = 1)
     return mapa
