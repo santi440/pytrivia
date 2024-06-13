@@ -1,9 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from pathlib import Path
 import streamlit as st
 
 def grafico_dias(game):
+    """Muestra un grafico de barras en streamlit con la cantidad partidas jugadas en cada dia de la semana
+        Args:
+             game (str): Una direccion del archivo que contiene los resultados de cada vez que se juega
+             
+        Returns:
+                None"""
     df = pd.read_csv(game)
     
     #Convierto el campo Fecha y hora a un tipo de dato de pandas 
@@ -33,8 +38,3 @@ def grafico_dias(game):
     
     st.pyplot(plt.gcf())
     #print(conteo_dias_semana)
-
-if(__name__ == "__main__"):
-    file_game = Path('Pytrivia','csv','resultado.csv')
-    grafico_dias(file_game)
-    

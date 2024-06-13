@@ -1,9 +1,17 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-from pathlib import Path
 
 def graficar_genero(game,players):
+    """Muestra un grafico en streamlit de los jugadores registrados segun su genero
+        Args:
+             game (str): Una direccion del archivo que contiene los resultados de cada vez que se juega
+             players(str) : Una direccion del archivo donde con las personas registradas
+
+        Returns:
+                None
+    """
+    
     registered_players = pd.read_csv(players)   
     
     df_result = pd.read_csv(game)
@@ -16,15 +24,10 @@ def graficar_genero(game,players):
     
     # Agrupo por genero
     agrupado = df_filtrado.groupby('Genero').size()
-    
-    grafico = agrupado.plot(kind='pie', autopct='%1.1f%%', title='Jugadores Por genero')
+
+    grafico = agrupado.plot(kind='pie', autopct='%1.1f%%', title='Jugadores Por genero que están registrados y jugaron')
     
     # Ver el listado de usuarios agrupados
     #print(df_filtrado.groupby('Genero')['Email'].apply(list))
     
     st.pyplot(plt.gcf())
-
-if(__name__ == "__main__"):
-    file_game = Path('Pytrivia','csv','resultado.csv')
-    file_players = Path('Pytrivia','csv','datosformularios.csv')
-    graficar_genero(file_game,file_players)

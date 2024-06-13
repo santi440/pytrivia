@@ -7,21 +7,21 @@ file_game = Path('..','Pytrivia','csv','resultado.csv')
 file_players = Path('..','Pytrivia','csv','datos_formularios.csv')
 
 # Lista de opciones
-opciones = ['Opción 1', 'Opción 2', 'Opción 3','Opción 4', 'Opción 5', 'Opcion 6', 'Opcion 7', 'Opcion 8', 'Opcion 9', 'Opcion 10']
+opciones = ['Jugadores que jugaron por género', 'Jugadores que superan la media', 'Cantidad de partidas por dia de la semana','Promedio de respuestas correctas por meses', 'Top 10 de usuarios con mayor cantidad de puntos acumulados', 'Opcion 6', 'Opcion 7', 'Opcion 8', 'Opcion 9', 'Opcion 10']
 
 # Crear el selectbox
 opcion_seleccionada = st.selectbox('Selecciona una opción:', opciones)
 
 match opcion_seleccionada:
-    case 'Opción 1':
+    case 'Jugadores que jugaron por género':
         fe.graficar_genero(file_game,file_players)    
-    case 'Opción 2':
+    case 'Jugadores que superan la media':
         fe.graficar_porcentaje(file_game)
-    case 'Opción 3':
+    case 'Cantidad de partidas por dia de la semana':
         fe.grafico_dias(file_game)
-    case 'Opción 4':
+    case 'Promedio de respuestas correctas por meses':
         fe.promedio_fechas(file_game)
-    case 'Opción 5':
+    case 'Top 10 de usuarios con mayor cantidad de puntos acumulados':
         fe.mejores(file_game)
     case 'Opcion 6':
         fe.estadistica_6(file_game)

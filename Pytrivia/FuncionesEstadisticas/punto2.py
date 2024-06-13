@@ -1,9 +1,15 @@
 import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
-from pathlib import Path
 
 def graficar_porcentaje(game): 
+    """Muestra un grafico en streamlit de los jugadores por encima de la media 
+        Args:
+             game (str): Una direccion del archivo que contiene los resultados de cada vez que se juego
+
+        Returns:
+                None
+    """
     df_result = pd.read_csv(game)
 
     # Calcular los percentiles
@@ -19,8 +25,5 @@ def graficar_porcentaje(game):
     #hoverinfo para que se vea el porcentaje al pasar por encima 
     fig_pie = go.Figure(data=[go.Pie(labels=labels_players, values=values_players, hole=0.3,hoverinfo="label+value")])
     fig_pie.update_layout(title="Partidas que superan la media")
+    
     st.plotly_chart(fig_pie)
-
-if(__name__ == "__main__"):
-    file_game = Path('Pytrivia','csv','resultado.csv')
-    fig_pie=graficar_porcentaje(file_game)

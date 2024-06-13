@@ -1,9 +1,15 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from pathlib import Path
 import streamlit as st
 
 def promedio_fechas(game):
+    """Muestra una tabla en streamlit de los promedios de respuestas correctas en los meses jugados
+        Args:
+             game (str): Una direccion del archivo que contiene los resultados de cada vez que se juega
+             
+        Returns:
+                None
+        """
     df = pd.read_csv(game)
     
     #Convierto el campo Fecha y hora a un tipo de dato de pandas 
@@ -21,6 +27,7 @@ def promedio_fechas(game):
     df_filtrado['Año-Mes'] = df_filtrado['Fecha y hora'].dt.strftime('%Y/%m')
 
     # Calcular el promedio de preguntas acertadas por mes
-    promedio_mensual = df_filtrado.groupby('Año-Mes')['Cantidad de respuestas correctas'].mean()
+    promedio_mensual = df_filtrado.groupby('Año-Mes')['Promedio de Respuestas correctas'].mean()
     
+    st.write("Promedio Mensual jugado")
     st.write(promedio_mensual)
