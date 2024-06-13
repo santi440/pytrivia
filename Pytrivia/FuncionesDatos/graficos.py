@@ -1,7 +1,7 @@
 import pandas as pd
 import folium
 import streamlit as st
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from pathlib import Path
 
 def _get_color (elevation):     
@@ -41,3 +41,10 @@ def lakes_map (df_lakes,mapa):
     df_lakes = df_lakes[['Nombre','Latitud(GD)','Longitud(GD)']]
     df_lakes.apply(lambda row: _add_marker_lake(row,mapa), axis = 1)
     return mapa
+
+
+def graph_airport_size (df_airports):
+    df_airports = df_airports.groupby('type').size()
+    grafico = df_airports.plot(kind='pie', autopct='%1.1f%%', title='Tamaño de aeropuertos')
+    
+    st.pyplot(plt.gcf())
