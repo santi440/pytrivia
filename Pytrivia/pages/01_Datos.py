@@ -19,7 +19,8 @@ option = st.selectbox("Elija que datos ver", options = ['Aeropuertos','Lagos'])
 
 match option:
     case 'Aeropuertos':
-        mapa = func.airport_map(df_airports)
+        elevation = st.selectbox("Elevacion", options = ['bajo','medio','alto'])
+        mapa = func.airport_map(df_airports,elevation)
         folium_static(mapa)
     case 'Lagos':
         st.write('b')
