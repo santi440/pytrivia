@@ -19,7 +19,8 @@ def tematica_por_genero(plays_route, users_route):
     * Con un merge se combinan las jugadas y los datos de los usuarios en un solo dataframe
     * Se hace con la columna 'Usuario' y de la forma 'Inner'
     '''
-    merged_data = pd.merge(plays_data, users_data, left_on='Usuario', right_on='Email', how='inner')    
+    merged_data = pd.merge(plays_data, users_data, left_on='Email', right_on='Email', how='inner')    
+                        # A la hora de juntar todo con el juego ver con que campos tomar el merge
     '''
     * Agrupa por genero y tematica y calcula la suma de puntaje
     * El reset_index agrega la columna al dataset, para luego poder ordenar

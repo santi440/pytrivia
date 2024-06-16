@@ -31,10 +31,17 @@ def usuarios_en_racha(plays_route):
     # A la columna fecha y hora se le saca la hora para poder comparar
     plays_more0['Fecha_Sin_Hora'] = plays_more0['Fecha y hora'].dt.date
 
-    # Falta logica para calcular que haya una jugada para cada dia por jugador. Habria que hacer un 
-    # un unique de fecha y usuario y ver si es 7
+    ''' 
+    -Primero se agrupa la informacion por usuario. Luego aplicando un filter y un lambda, se toman unicamente aquellos jugadores 
+    los cuales tengan por lo menos una jugada por dia. 
+    -El lambda pregunta si existen por los menos 7 valores unicos de fechas (aunque haya 10 jugadas, si no hay una por dia no lo toma)
+    -El ['Usuario'].unique() es para que no haya usuarios repetidos en el listado
+    '''
+    streak_users = plays_more0.groupby('Usuario').filter(lambda x: x['Fecha_Sin_Hora'].nunique() >= 7)['Usuario'].unique()
 
     # Mostrar el listado de usuarios en racha
     st.subheader("Listado de usuarios en racha:")
+    for player in streak_users:
+        st.write(player)
 
 
