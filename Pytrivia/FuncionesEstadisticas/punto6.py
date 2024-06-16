@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 
-def estadistica_6(plays_route):
+def dificultad_datasets(plays_route):
     '''
     Muestra los datasets ordenados por dificultad. Primero se muestra el dataset con
     mayor numero de errores. Tambien muestra la cantidad de respuestas incorrectas de cada uno.

@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import streamlit as st
 from pathlib import Path
 
-def estadistica_10(plays_route):
+def usuarios_en_racha(plays_route):
     '''
     Lista los usuarios que registran una partida con un puntaje mayor a cero en todos 
     los días durante los últimos 7.

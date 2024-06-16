@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 
-def estadistica_8(plays_route, users_route):
+def tematica_por_genero(plays_route, users_route):
     '''
     Listar para cada género cuál es la temática en la cual demuestra mayor
     conocimiento. Tambien muestra la cantidad total de puntos que tiene.

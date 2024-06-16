@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 
-def estadistica_9(plays_route):
+def info_dificultades(plays_route):
     '''
     Lista cada dificultad de juego junto con el puntaje promedio obtenido en cada una y
     con la cantidad de veces que fue elegida.

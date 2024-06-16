@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 
-def estadistica_7(plays_route):
+def comparar_dos_usuarios(plays_route):
     '''
     Pide al usario seleccionar dos usuarios y muestra gráfico que compara la evolución 
     de puntaje entre los mismos a lo largo del tiempo.
