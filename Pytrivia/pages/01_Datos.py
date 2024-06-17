@@ -27,7 +27,7 @@ mapa = folium.Map(
 match option:
 
     case 'Aeropuertos':
-        option2 = st.selectbox("Elija grafico", options= ['Mapa', 'Grafico de torta', 'Tercer grafico'])
+        option2 = st.selectbox("Elija grafico", options= ['Mapa', 'Grafico de torta', 'Grafico de Barra'])
         match option2:
 
              case "Mapa":
@@ -36,8 +36,18 @@ match option:
                 folium_static(mapa)
              case "Grafico de torta":
                 func.graph_airport_size(df_airports)
+             case "Grafico de Barra":
+                func.bar_airport_elevation(df_airports)
 
 
     case 'Lagos':
-        mapa = func.lakes_map(df_lakes,mapa)
-        folium_static(mapa)
+        option2 = st.selectbox("Elija grafico", options= ['Mapa', 'Grafico de torta', 'Grafico de Barra'])
+        match option2:
+
+             case "Mapa":
+                mapa = func.lakes_map(df_lakes,mapa)
+                folium_static(mapa)
+             case "Grafico de torta":
+                func.graph_provinces_lakes(df_lakes)
+             case "Grafico de Barra":
+                func.bar_lakes_depth(df_lakes)
