@@ -55,7 +55,7 @@ with st.form("my_form"):
     username = st.text_input("Nombre de Usuario")
     full_name = st.text_input("Nombre Completo")
     email = st.text_input("Mail")
-    birth_date = st.date_input("Fecha de Nacimiento")
+    birth_date = st.date_input("Fecha de Nacimiento", min_value= date(1900,1,1))
     gender = st.selectbox("Género", ["Masculino", "Femenino", "Otro"])
     
     # Botón para enviar el formulario

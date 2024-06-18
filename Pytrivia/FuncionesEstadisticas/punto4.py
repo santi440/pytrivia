@@ -27,7 +27,7 @@ def promedio_fechas(game):
     df_filtrado['Año-Mes'] = df_filtrado['Fecha y hora'].dt.strftime('%Y/%m')
 
     # Calcular el promedio de preguntas acertadas por mes
-    promedio_mensual = df_filtrado.groupby('Año-Mes')['Promedio de Respuestas correctas'].mean()
+    promedio_mensual = df_filtrado.groupby('Año-Mes')['Cantidad de respuestas correctas'].mean()
     
     st.write("Promedio Mensual jugado")
     st.write(promedio_mensual)
