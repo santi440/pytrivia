@@ -13,6 +13,12 @@ def usuarios_en_racha(plays_route):
 
     file = pd.read_csv(plays_route)
 
+    # Se controla que haya datos en el dataset
+    if file.empty:
+        st.subheader('Listado de usuarios en racha:')
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
+        return
+
     # Convertir la columna 'Fecha y hora' a tipo datetime 
     file['Fecha y hora'] = pd.to_datetime(file['Fecha y hora'])
 
@@ -41,7 +47,10 @@ def usuarios_en_racha(plays_route):
 
     # Mostrar el listado de usuarios en racha
     st.subheader("Listado de usuarios en racha:")
-    for player in streak_users:
-        st.write(player)
+    if len(streak_users) == 0:
+        st.write('Todavía no hay ningun jugador en racha. ¡Juega y sé el primero!')
+    else:
+        for player in streak_users:
+            st.write(player)
 
 

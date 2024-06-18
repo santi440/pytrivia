@@ -12,6 +12,12 @@ def info_dificultades(plays_route):
 
     file = pd.read_csv(plays_route)
 
+    # Se controla que haya datos en el dataset
+    if file.empty:
+        st.subheader('Puntaje promedio de cada dificultad y cantidad de veces que fueron seleccionadas:')
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
+        return
+
     # Utilizando grupby y la funcion .mean() se obitene el promedio
     average_difficulty = file.groupby('Dificultad')['Puntos'].mean()
 

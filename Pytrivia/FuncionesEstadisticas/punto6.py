@@ -12,6 +12,12 @@ def dificultad_datasets(plays_route):
 
     file = pd.read_csv(plays_route)
 
+    # Se controla que haya datos en el dataset
+    if file.empty:
+        st.subheader('Temáticas ordenados por dificultad:')
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
+        return
+
     # Variable con la maxima cantidad de resp correctas
     max_correctas = 5
     

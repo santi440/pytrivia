@@ -14,12 +14,29 @@ def comparar_dos_usuarios(plays_route):
 
     file = pd.read_csv(plays_route)
 
+    # Se controla que haya datos en el dataset
+    if file.empty:
+        st.subheader('Comparación de la evolución del puntaje entre dos usuarios:')
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
+        return
+
     # Lista de usuarios únicos
     unique_users = file['Usuario'].unique()
+
+    # Se controla que por lo menos haya dos usuarios para hacer la comparacion
+    if len(unique_users) < 2:
+        st.subheader('Comparación de la evolución del puntaje entre dos usuarios:')
+        st.write("No hay suficientes usuarios para hacer una comparación.")
+        return
 
     # Widget para seleccionar el primer usuario y segundo usuario
     user1 = st.selectbox("Selecciona el primer usuario:", unique_users)
     user2 = st.selectbox("Selecciona el segundo usuario:", unique_users)
+
+    # Se controla que se seleccionen dos usuarios diferentes
+    if user1 == user2:
+        st.write("Debes seleccionar dos usuarios diferentes.")
+        return
 
     # Columna 'Fecha y hora' a datetime
     file['Fecha y hora'] = pd.to_datetime(file['Fecha y hora'])

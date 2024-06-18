@@ -14,6 +14,12 @@ def tematica_por_genero(plays_route, users_route):
     
     plays_data = pd.read_csv(plays_route)
     users_data = pd.read_csv(users_route)
+
+    # Se controla que haya datos en el dataset. No hace falta controlar el de usuarios
+    if plays_data.empty:
+        st.subheader('Temática en la que cada género demuestra mayor conocimiento:')
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!.")
+        return
     
     '''
     * Con un merge se combinan las jugadas y los datos de los usuarios en un solo dataframe
