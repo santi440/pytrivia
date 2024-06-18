@@ -1,16 +1,30 @@
 import streamlit as st
-st.title("Bienvenido a PyTrivia")
+from FuncionesSesion import Sesiones
+import pandas as pd
+
+if(Sesiones.is_user_logged_in()):
+    user = Sesiones.get_logged_in_user()
+    user = user['Usuario'].values[0]
+    st.title(f"Bienvenido de nuevo a Pytrivia, {user} ")
+else:
+    st.title("Bienvenido a Pytrivia")
     
 st.header("Descripción del Juego")
 st.write("""
     PyTrivia es juego de preguntas y respuestas diseñado para poner a prueba tus conocimientos
-    en una amplia variedad de temas junto con un sistema de puntaje ideal para competir contra otros jugadores.
+    en una variedad de temas relacionados con datos de nuestro país junto con un sistema de puntaje ideal para competir contra otros jugadores.
     """)
 
 st.header("Datos Necesarios para Comenzar")
-st.write(f"""
-    Para empezar a jugar, solo necesitas Registrarte en la sección de Registro.
-    """)
+if(Sesiones.is_user_logged_in()):
+    st.write(f"""
+        Para empezar a jugar, dirígete a la sección de Juego.
+        """)
+else:
+    st.write(f"""
+        Anetes de comenzar necesitas Registrarte o Iniciar Sesion en la sección de Registro.
+        Luego, dirígete a la sección de Juego.
+        """)
 
 st.header("Instrucciones Básicas")
 st.write(f"""
@@ -30,6 +44,11 @@ st.write("""
     - **Difícil**: Preguntas desafiantes para expertos.
     
     La dificultad afecta tanto la complejidad de las preguntas como la cantidad de puntos que podés ganar.
+    Además, podés elejir la temática de las preguntas:
+         - **Aeropuertos**
+         - **Lagos**
+         - **Conectividad**
+         - **Último Censo (2022)**
     """)
 
 st.header("Detalles Adicionales")
@@ -37,13 +56,19 @@ st.write("""
     - Revisa el ranking para ver cómo te comparas con otros jugadores.
     """)
 
+
+
 # Configurar el menú de la aplicación
 st.sidebar.title("Menú")
-selected = st.sidebar.selectbox("Ir a", ["Inicio", "Jugar Trivia", "Ranking", "Iniciar Sesion"])
+selected = st.sidebar.selectbox("Ir a", ["Inicio", "Jugar Trivia", "Ranking", "Iniciar Sesion", "Datos", "Estadisticas"])
 
 if selected == "Jugar Trivia":
     st.switch_page("pages/02_Juego.py")
 elif selected == "Ranking":
-    st.switch_page("pages/06_Estadisticas.py")
+    st.switch_page("pages/05_Ranking.py")
 elif selected == "Iniciar Sesion":
     st.switch_page("pages/03_Formulario de Registro.py")
+elif selected == "Datos":
+    st.switch_page("pages/01_Datos.py")
+elif selected == "Estadisticas":
+    st.switch_page("pages/06_Estadisticas.py")

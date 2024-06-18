@@ -21,3 +21,6 @@ def get_logged_in_user():
         return user
     else:
         return None
+    
+def is_user_logged_in():
+    return 'email' in st.session_state
