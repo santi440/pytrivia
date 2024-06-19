@@ -2,6 +2,25 @@ import pandas as pd
 import random
 from pathlib import Path
 from unidecode import unidecode
+from streamlit_autorefresh import st_autorefresh
+from datetime import datetime, timedelta
+import streamlit as st
+
+def set_timer(amount):
+    st.session_state.start_time = datetime.now()
+    st.session_state.end_time = st.session_state.start_time + timedelta(minutes= amount)
+
+def timer_count():
+    st_autorefresh(interval=1000)
+    if st.session_state.end_time:
+        remaining_time = st.session_state.end_time - datetime.now()
+        if remaining_time.total_seconds() > 0:
+            minutes, seconds = divmod(int(remaining_time.total_seconds()), 60)
+            st.write(f"Tiempo restante: {minutes:02d}:{seconds:02d}")
+        else:
+            st.session_state.step = 'completed'
+
+# Función para verificar puntos
 
 def check_points(answers, diff):
     """
@@ -242,9 +261,6 @@ def generateQuestions(theme):
             questions_and_answers.append((question, answer))
         
         difficulty = st.session_state.difficulty
-
-        if not difficulty:
-            st.warning("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
         match difficulty:
             case 'Fácil':
