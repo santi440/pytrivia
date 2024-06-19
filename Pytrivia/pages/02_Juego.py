@@ -93,7 +93,7 @@ if Sesiones.is_user_logged_in():
             st.write(question)
 
             if st.session_state.difficulty != 'Alta':
-                hint = gen.generate_hint(correct_answer, st.session_state.difficulty)
+                hint = gen.generate_hint(correct_answer, st.session_state.difficulty, st.session_state.theme)
                 if hint:
                     st.write(f"Pista: {hint}")
 

@@ -1,61 +1,67 @@
 import pandas as pd
 import random
-import numpy as np
 from pathlib import Path
 from unidecode import unidecode
-from streamlit_autorefresh import st_autorefresh
-from datetime import datetime, timedelta
-import streamlit as st
 
-def set_timer(amount):
-    st.session_state.start_time = datetime.now()
-    st.session_state.end_time = st.session_state.start_time + timedelta(minutes= amount)
-
-def timer_count():
-    st_autorefresh(interval=1000)
-    if st.session_state.end_time:
-        remaining_time = st.session_state.end_time - datetime.now()
-        if remaining_time.total_seconds() > 0:
-            minutes, seconds = divmod(int(remaining_time.total_seconds()), 60)
-            st.write(f"Tiempo restante: {minutes:02d}:{seconds:02d}")
-        else:
-            st.session_state.step = 'completed'
-
-# Función para verificar puntos
 def check_points(answers, diff):
+    """
+    Verifica la cantidad de respuestas correctas y calcula los puntos obtenidos según la dificultad.
+
+    Parameters:
+    - answers: Lista de tuplas (respuesta dada, respuesta esperada).
+    - diff: Dificultad de la pregunta ('Baja', 'Media', 'Alta').
+
+    Returns:
+    - Tuple: (Cantidad de respuestas correctas, Puntos obtenidos).
+    """
     points = 0
     for answer in answers:
         if unidecode(answer[0].lower().replace(" ", "")) == unidecode(str(answer[1]).lower().replace(" ", "")):
             points += 1
-    cant=points
+    cant = points
     if diff == 'Media':
         points = points * 1.5
     elif diff == 'Alta':
         points = points * 2
     return cant, points
 
-# Función para generar pistas
-def generate_hint(answer, difficulty):
+def generate_hint(answer, difficulty, theme):
+    """
+    Genera una pista basada en la respuesta y la dificultad.
 
-    if difficulty == "Fácil":
-        return f"La respuesta comienza con '{answer[0]}' y termina con '{answer[-1]}'"
-    elif difficulty == "Media":
-        return f"La respuesta comienza con '{answer[0]}'"
+    Parameters:
+    - answer: Tupla (respuesta dada, respuesta esperada).
+    - difficulty: Dificultad de la pregunta ('Fácil', 'Media').
+    - theme: Tema de la pregunta.
+
+    Returns:
+    - str or None: Pista generada o None si no se genera pista.
+    """
+    if theme == "Conectividad":
+        return None
+    else:
+        if difficulty == "Fácil":
+            return f"La respuesta comienza con '{answer[0]}' y termina con '{answer[-1]}'"
+        elif difficulty == "Media":
+            return f"La respuesta comienza con '{answer[0]}'"
     return None
 
-# Función para generar preguntas de aeropuertos
 def generar_pregunta_aeropuertos(row):
-    print ('Entrando a generar pregunta')
-    question = f"Complete la opcion faltante de los siguientes datos de un aeropuerto\n"
+    """
+    Genera una pregunta sobre datos de un aeropuerto para completar.
+
+    Parameters:
+    - row: Fila del DataFrame con los datos del aeropuerto.
+
+    Returns:
+    - Tuple: (Pregunta, Respuesta correcta).
+    """
+    question = f"Complete la opción faltante de los siguientes datos de un aeropuerto\n"
     
-    # Definir atributos disponibles para completar y mostrar
-    completable = ("Municipio","Provincia")
-    shown = ["Municipio","Nombre","Provincia","Elevación"]
+    completable = ("Municipio", "Provincia")
+    shown = ["Municipio", "Nombre", "Provincia", "Elevación"]
     
-    # Seleccionar aleatoriamente el atributo a completar y los mostrados
     complete = random.choice(completable)
-    
-    #Eliminar el que se va a completar de entre los que se muestran.
     shown.remove(complete)
     
     options = {
@@ -67,30 +73,34 @@ def generar_pregunta_aeropuertos(row):
     }
     
     for key in shown:
-        question+= f"- {key}: {row[options[key]]}\n"
+        question += f"- {key}: {row[options[key]]}\n"
     
-    question+= f"- {complete}: ???????"
+    question += f"- {complete}: ???????"
         
     correct_answer = row[options[complete]]
     
     return question, correct_answer
 
-# Función para generar preguntas de lagos
 def generar_pregunta_lagos(row):
+    """
+    Genera una pregunta sobre datos de un lago para completar.
+
+    Parameters:
+    - row: Fila del DataFrame con los datos del lago.
+
+    Returns:
+    - Tuple: (Pregunta, Respuesta correcta).
+    """
+    question = f"Complete la opción faltante de los siguientes datos de un lago\n"
     
-    question = f"Complete la opcion faltante de los siguientes datos de un lago\n"
+    completable = ("Nombre", "Provincia")
+    showable = ("Nombre", "Provincia", "Superficie (En km²)", "Profundidad Maxima (en metros)")
     
-    # Definir atributos disponibles para completar y mostrar
-    completable = ("Nombre","Provincia")
-    showable = ("Nombre","Provincia","Superficie (En km²)","Profundidad Maxima (en metros)")
-    
-    # Seleccionar aleatoriamente el atributo a completar y los mostrados
     complete = random.choice(completable)
     shown = random.sample(showable, 3)
     
-    # Asegurar que el atributo a completar no esté entre los mostrados
     while complete in shown:
-        shown = random.sample (showable, 3)
+        shown = random.sample(showable, 3)
     
     options = {
         "Nombre": "Nombre",
@@ -100,79 +110,104 @@ def generar_pregunta_lagos(row):
     }
     
     for key in shown:
-        question+= f"- {key}: {row[options[key]]}\n"
+        question += f"- {key}: {row[options[key]]}\n"
 
-    question+= f"- {complete}: ???????"
+    question += f"- {complete}: ???????"
     
     correct_answer = row[options[complete]]
     
     return question, correct_answer
 
-# Función para generar preguntas de conectividad
 def generar_pregunta_conectividad(row):
+    """
+    Genera una pregunta sobre conectividad de una localidad para completar con SI o NO.
 
-    question = f"Complete con SI o NO la opcion faltante de la siguiente localidad:\n"
-    
-    # Definir atributos disponibles para completar y mostrar
-    completable = ("Tiene ADSL?", "Tiene CABLEMODEM?", "Tiene DIALUP?", "Tiene FIBRAOPTICA?", 
-               "Tiene SATELITAL?", "Tiene WIRELESS?", "Tiene TELEFONIAFIJA?", "Tiene 3G?", "Tiene 4G?")
+    Parameters:
+    - row: Fila del DataFrame con los datos de la localidad.
 
-    showable = ("Provincia","Partido","Localidad")
+    Returns:
+    - Tuple: (Pregunta, Respuesta correcta).
+    """
+    question = f"Complete con SI o NO la opción faltante de la siguiente localidad:\n"
     
-    # Seleccionar aleatoriamente el atributo a completar y los mostrados
+    completable = (
+        "Tiene ADSL?", "Tiene CABLEMODEM?", "Tiene DIALUP?", "Tiene FIBRAOPTICA?", 
+        "Tiene SATELITAL?", "Tiene WIRELESS?", "Tiene TELEFONIAFIJA?", "Tiene 3G?", "Tiene 4G?"
+    )
+
+    showable = ("Provincia", "Partido", "Localidad")
+    
     complete = random.choice(completable)
     shown = showable
     
     options = {
-    "Tiene ADSL?": "ADSL",
-    "Tiene CABLEMODEM?": "CABLEMODEM",
-    "Tiene DIALUP?": "DIALUP",
-    "Tiene FIBRAOPTICA?": "FIBRAOPTICA",
-    "Tiene SATELITAL?": "SATELITAL",
-    "Tiene WIRELESS?": "WIRELESS",
-    "Tiene TELEFONIAFIJA?": "TELEFONIAFIJA",
-    "Tiene 3G?": "3G",
-    "Tiene 4G?": "4G"
-}
+        "Tiene ADSL?": "ADSL",
+        "Tiene CABLEMODEM?": "CABLEMODEM",
+        "Tiene DIALUP?": "DIALUP",
+        "Tiene FIBRAOPTICA?": "FIBRAOPTICA",
+        "Tiene SATELITAL?": "SATELITAL",
+        "Tiene WIRELESS?": "WIRELESS",
+        "Tiene TELEFONIAFIJA?": "TELEFONIAFIJA",
+        "Tiene 3G?": "3G",
+        "Tiene 4G?": "4G"
+    }
 
     for key in shown:
-        question+= f"- {key}: {row[key]}\n"
+        question += f"- {key}: {row[key]}\n"
 
-    question+= f"- {complete}: ???????"
+    question += f"- {complete}:  Si o No?"
     
     correct_answer = row[options[complete]]
     
     return question, correct_answer
 
-# Función para generar preguntas del censo 2022
 def generar_pregunta_censo(row):
+    """
+    Genera una pregunta sobre datos del censo 2022 para completar.
+
+    Parameters:
+    - row: Fila del DataFrame con los datos del censo 2022.
+
+    Returns:
+    - Tuple: (Pregunta, Respuesta correcta).
+    """
     question = f"Cual es la provincia que cumple con los siguientes datos?\n"
     
-    # Definir atributos disponibles para completar y mostrar
-    showable = ("Total de población","Población en situación de calle(²)","Porcentaje de población en situación de calle","Mujeres Total de población","Varones Total de población")
+    showable = (
+        "Total de población", "Población en situación de calle(²)", 
+        "Porcentaje de población en situación de calle", "Mujeres Total de población", 
+        "Varones Total de población"
+    )
     
-    # Seleccionar aleatoriamente el atributo a completar y los mostrados
     complete = "Jurisdicción"
     shown = random.sample(showable, 3)
     
     for key in shown:
-        question+= f"- {key}: {row[key]}\n"
+        question += f"- {key}: {row[key]}\n"
     
-    question+= f"- Provincia: ???????"
+    question += f"- Provincia: ???????"
         
     correct_answer = row[complete]
     
     return question, correct_answer
 
-# Función para generar preguntas basado en la tematica
 def generateQuestions(theme):
+    """
+    Genera 5 preguntas basadas en la temática seleccionada.
+
+    Parameters:
+    - theme: Tema de las preguntas.
+
+    Returns:
+    - List of Tuples: Lista de preguntas y respuestas generadas.
+    """
     base_path = Path(__file__).resolve().parent.parent.parent / 'datasets_custom'
     questions_and_answers = []
     used_rows = []
     
     if theme == "Aeropuertos":
         df = pd.read_csv(base_path / 'ar-airports-custom.csv')
-        df = df.dropna(subset=["municipality", "name", "prov_name","elevation_name","iata_code"])  # Filtrar filas con valores nulos
+        df = df.dropna(subset=["municipality", "name", "prov_name", "elevation_name", "iata_code"])
         
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -184,7 +219,7 @@ def generateQuestions(theme):
             
     elif theme == "Lagos":
         df = pd.read_csv(base_path / 'lagos_arg_custom.csv')
-        df = df.dropna(subset=["Nombre", "Ubicación", "Superficie (km²)","Profundidad máxima (m)"])  # Filtrar filas con valores nulos
+        df = df.dropna(subset=["Nombre", "Ubicación", "Superficie (km²)", "Profundidad máxima (m)"])
         
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -194,10 +229,9 @@ def generateQuestions(theme):
             question, answer = generar_pregunta_lagos(row)
             questions_and_answers.append((question, answer))
             
-            
     elif theme == "Conectividad":
         df = pd.read_csv(base_path / 'Conectividad_Internet.csv')
-        df = df.dropna()  # Filtrar filas con valores nulos
+        df = df.dropna()
         
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -222,8 +256,8 @@ def generateQuestions(theme):
         set_timer(amount)
 
     elif theme == "Censo 2022":
-        df = pd.read_csv(base_path / 'Censo_Modificado.csv')
-        df = df.dropna(subset=["Total de población","Población en situación de calle(²)","Porcentaje de población en situación de calle","Mujeres Total de población","Varones Total de población"])  # Filtrar filas con valores nulos
+        df = pd.read_csv(base_path / 'Censo_Modificado.csv') 
+        df = df.dropna(subset=["Total de población", "Población en situación de calle(²)", "Porcentaje de población en situación de calle", "Mujeres Total de población", "Varones Total de población"])
 
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -234,13 +268,4 @@ def generateQuestions(theme):
             questions_and_answers.append((question, answer))
             
     return questions_and_answers
-    
-if __name__ == "__main__":
-    print("Hola")
-    preguntas = generateQuestions("Censo 2022")
-    if preguntas:
-        for i, (pregunta, respuesta) in enumerate(preguntas, start=1):
-            print(f"Pregunta {i}: {pregunta}")
-            print(f"Respuesta {i}: {respuesta}")
-    else:
-        print("No se generaron preguntas.")
+    return questions_and_answers
