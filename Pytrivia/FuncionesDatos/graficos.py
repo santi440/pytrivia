@@ -8,7 +8,10 @@ from pathlib import Path
 
 ##AEROPUERTOS
 
-def _get_color (elevation):     
+def _get_color (elevation):
+    """
+    Recibe la elevación y retorna el color correspondiente a la elevación.
+    """     
     if elevation == 'bajo':
         color  = 'green'
     elif elevation == 'medio' :
@@ -18,6 +21,10 @@ def _get_color (elevation):
     return color
 
 def _add_marker(row,mapa):
+    """
+    Recibe la fila del DataFrame y el mapa para agregar el marcador (row y mapa).
+    Agrega un marcador en el mapa basado en la información de una fila de DataFrame.
+    """
     color = _get_color(row['elevation_name'])
     folium.Marker(
         [row['latitude_deg'], row['longitude_deg']],
@@ -27,6 +34,10 @@ def _add_marker(row,mapa):
 
 
 def airport_map (df_airports,elevation,mapa):
+    """
+    Recibe el DataFrame completo con la información de los aeropuertos, la/las elevaciones seleccionadas y el mapa (df_airports,elevation,mapa).
+    Genera y retorna un mapa de aeropuertos con marcadores basados en la elevación seleccionada.
+    """
     df_airports = df_airports[['name','latitude_deg','longitude_deg','elevation_name']]
     df_airports = df_airports.drop(df_airports[~df_airports['elevation_name'].isin(elevation)].index)
 
