@@ -22,9 +22,6 @@ datos = pd.read_csv(datos_path)
 if 'user' not in st.session_state:
     st.session_state.user = None
     
-if 'email' not in st.session_state:
-    st.session_state.email= None
-    
 if 'theme' not in st.session_state:
     st.session_state.theme = None
 
@@ -49,7 +46,11 @@ if 'points' not in st.session_state:
 if Sesiones.is_user_logged_in():
     if st.session_state.step == 'start':
         # Seleccionar usuario
-        email = st.selectbox('Selecciona tu usuario', options=datos['Email'].unique())
+        full_user = Sesiones.get_logged_in_user()
+        email = full_user['Email'].values[0]
+        user = full_user['Usuario'].values[0]
+
+        st.write(f"¿Estás listo para jugar {user}?")
 
         # Seleccionar temática
         theme = st.selectbox('Selecciona una temática', ['Aeropuertos', 'Lagos', 'Conectividad', 'Censo 2022'])
@@ -65,7 +66,6 @@ if Sesiones.is_user_logged_in():
         """)
 
         if st.button('Comenzar Juego'):
-            user = datos.loc[datos['Email'] == email, 'Usuario'].values[0]
             st.session_state.email = email
             st.session_state.user = user
             st.session_state.theme = theme
