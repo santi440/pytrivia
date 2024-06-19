@@ -69,9 +69,18 @@ if Sesiones.is_user_logged_in():
 
         # Explicación de niveles de dificultad
         st.info("""
+            En las tematicas Aeropuertos, Lagos y Censo 2022:
+            
             **Fácil:** Se proporciona una pista detallada.  
             **Media:** Se proporciona una pista general.  
             **Alta:** No se proporciona ninguna pista.
+            
+            En la tematica Conectividad:
+            
+            **Fácil:** Tienes 5 minutos para responder.  
+            **Media:** Tienes 3 minutos para responder.    
+            **Alta:** Tienes 1 minuto para responder.  
+            
         """)
 
         if st.button('Comenzar Juego'):
@@ -130,6 +139,7 @@ if Sesiones.is_user_logged_in():
     
     if st.session_state.step == 'completed':
         st.write(f"Juego completado. Respuestas correctas: {st.session_state.correct_count}. Puntos obtenidos: {st.session_state.points}.")
+        st.write ("Puede ver los datos de su última partida al final del Ranking.")
         col1, col2 = st.columns(2)
         
         with col1:

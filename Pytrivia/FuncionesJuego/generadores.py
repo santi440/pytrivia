@@ -7,10 +7,21 @@ from datetime import datetime, timedelta
 import streamlit as st
 
 def set_timer(amount):
+    """
+    Establece un temporizador para una cantidad de minutos especificada.
+
+    Parameters:
+    - amount: La cantidad de minutos para el temporizador.
+    """
     st.session_state.start_time = datetime.now()
-    st.session_state.end_time = st.session_state.start_time + timedelta(minutes= amount)
+    st.session_state.end_time = st.session_state.start_time + timedelta(minutes=amount)
 
 def timer_count():
+    """
+    Cuenta el tiempo restante del temporizador y muestra en la interfaz de Streamlit.
+
+    Si el tiempo se ha agotado, cambia el estado a 'completed'.
+    """
     st_autorefresh(interval=1000)
     if st.session_state.end_time:
         remaining_time = st.session_state.end_time - datetime.now()
@@ -19,8 +30,6 @@ def timer_count():
             st.write(f"Tiempo restante: {minutes:02d}:{seconds:02d}")
         else:
             st.session_state.step = 'completed'
-
-# Función para verificar puntos
 
 def check_points(answers, diff):
     """
@@ -150,8 +159,8 @@ def generar_pregunta_conectividad(row):
     question = f"Complete con SI o NO la opción faltante de la siguiente localidad:\n"
     
     completable = (
-        "Tiene ADSL?", "Tiene CABLEMODEM?", "Tiene DIALUP?", "Tiene FIBRAOPTICA?", 
-        "Tiene SATELITAL?", "Tiene WIRELESS?", "Tiene TELEFONIAFIJA?", "Tiene 3G?", "Tiene 4G?"
+        "Tiene ADSL?", "Tiene CABLE MODEM?", "Tiene DIALUP?", "Tiene FIBRA OPTICA?", 
+        "Tiene SEÑAL SATELITAL?", "Tiene WIFI?", "Tiene TELEFONIA FIJA?", "Tiene 3G?", "Tiene 4G?"
     )
 
     showable = ("Provincia", "Partido", "Localidad")
@@ -161,12 +170,12 @@ def generar_pregunta_conectividad(row):
     
     options = {
         "Tiene ADSL?": "ADSL",
-        "Tiene CABLEMODEM?": "CABLEMODEM",
+        "Tiene CABLE MODEM?": "CABLEMODEM",
         "Tiene DIALUP?": "DIALUP",
-        "Tiene FIBRAOPTICA?": "FIBRAOPTICA",
-        "Tiene SATELITAL?": "SATELITAL",
-        "Tiene WIRELESS?": "WIRELESS",
-        "Tiene TELEFONIAFIJA?": "TELEFONIAFIJA",
+        "Tiene FIBRA OPTICA?": "FIBRAOPTICA",
+        "Tiene SEÑAL SATELITAL?": "SATELITAL",
+        "Tiene WIFI?": "WIRELESS",
+        "Tiene TELEFONIA FIJA?": "TELEFONIAFIJA",
         "Tiene 3G?": "3G",
         "Tiene 4G?": "4G"
     }
@@ -174,7 +183,7 @@ def generar_pregunta_conectividad(row):
     for key in shown:
         question += f"- {key}: {row[key]}\n"
 
-    question += f"- {complete}:  Si o No?"
+    question += f"- {complete}:  ¿Si o No?"
     
     correct_answer = row[options[complete]]
     
@@ -283,5 +292,4 @@ def generateQuestions(theme):
             question, answer = generar_pregunta_censo(row)
             questions_and_answers.append((question, answer))
             
-    return questions_and_answers
     return questions_and_answers
