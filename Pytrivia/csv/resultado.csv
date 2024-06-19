@@ -1,31 +1,24 @@
 Fecha y hora,Usuario,Email,Dificultad,Temática,Cantidad de respuestas correctas,Puntos
-2024-06-05 10:15:23,santi,santi@gmail.com,Facil, Aeropuertos, 4,4
-2024-06-05 10:15:23,santi,santi@gmail.com,Facil, Lagos, 5,5
-2024-06-03 10:16:45,fede,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-03 10:16:45,fede,fede@gmail.com,Dificil, Lagos, 2,4
-2024-05-05 10:17:08,Ana,ana@gmail.com,Media, Aeropuertos,0,0
-2024-06-03 10:16:45,Juan,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-03 10:16:45,Nacho,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-03 10:16:45,Mati,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-03 10:16:45,bauti,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-03 10:16:45,lucia,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-03 10:16:45,luicina,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-03 10:16:45,lourdes,fede@gmail.com,Dificil, Lagos, 3,6
-2024-04-03 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-
-2024-06-10 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-11 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-12 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-13 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-14 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-15 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-2024-06-16 10:16:45,Fabri,fede@gmail.com,Dificil, Lagos, 3,6
-
-
-2024-06-12 10:16:45,Nacho,nacho@gmail.com,Media,Aeropuertos,1,6
-2024-06-13 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,4,9
-2024-06-14 10:16:45,Nacho,nacho@gmail.com,Facil,Lagos,5,8
-2024-06-15 10:16:45,Nacho,nacho@gmail.com,Media,Conectividad,3,5
-2024-06-16 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,2,4
-2024-06-17 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,2,4
-2024-06-18 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,2,4
+2024-06-05 10:15:23,santi,santi@gmail.com,Facil, Aeropuertos,4,4.0
+2024-06-05 10:15:23,santi,santi@gmail.com,Facil, Lagos,5,5.0
+2024-06-03 10:16:45,fede,fede@gmail.com,Dificil, Lagos,3,6.0
+2024-06-03 10:16:45,fede,fede@gmail.com,Dificil, Lagos,2,4.0
+2024-05-05 10:17:08,Ana,ana@gmail.com,Media, Aeropuertos,0,0.0
+2024-04-03 10:16:45,fede,fede@gmail.com,Dificil, Lagos,3,6.0
+2024-06-10 10:16:45,fede,fede@gmail.com,Dificil, Lagos,3,6.0
+2024-06-11 10:16:45,fede,fede@gmail.com,Dificil, Lagos,3,6.0
+2024-06-12 10:16:45,fede,fede@gmail.com,Dificil, Lagos,3,6.0
+2024-06-12 10:16:45,Nacho,nacho@gmail.com,Media,Aeropuertos,1,6.0
+2024-06-13 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,4,9.0
+2024-06-14 10:16:45,Nacho,nacho@gmail.com,Facil,Lagos,5,8.0
+2024-06-15 10:16:45,Nacho,nacho@gmail.com,Media,Conectividad,3,5.0
+2024-06-16 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,2,4.0
+2024-06-17 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,2,4.0
+2024-06-18 10:16:45,Nacho,nacho@gmail.com,Dificil,Aeropuertos,2,4.0
+2024-06-19 01:48:32,Nacho,nacho@gmail.com,Fácil,Conectividad,5,5.0
+2024-06-19 01:52:24,Nacho,nacho@gmail.com,Fácil,Lagos,2,2.0
+2024-06-19 01:58:53,santi,santi@gmail.com,Media,Aeropuertos,0,0.0
+2024-06-19 02:03:27,Bauti,bauti@gmail.com,Fácil,Aeropuertos,0,0.0
+2024-06-19 02:07:07,santi,santi@gmail.com,Fácil,Aeropuertos,0,0.0
+2024-06-19 02:08:20,santi,santi@gmail.com,Fácil,Aeropuertos,4,4.0
+2024-06-19 02:09:21,Bauti,bauti@gmail.com,Media,Conectividad,5,7.5

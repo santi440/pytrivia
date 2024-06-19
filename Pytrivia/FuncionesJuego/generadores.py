@@ -1,20 +1,20 @@
 import pandas as pd
 import random
 import numpy as np
+from pathlib import Path
 from unidecode import unidecode
 
 # Función para verificar puntos
 def check_points(answers, diff):
-    cant = 0
     points = 0
     for answer in answers:
         if unidecode(answer[0].lower().replace(" ", "")) == unidecode(str(answer[1]).lower().replace(" ", "")):
-            cant += 1
-    points = cant
+            points += 1
+    cant=points
     if diff == 'Media':
-        points += points * 0.5
+        points = points * 1.5
     elif diff == 'Alta':
-        points += points
+        points = points * 2
     return cant, points
 
 # Función para generar pistas
@@ -35,13 +35,12 @@ def generate_hint(answer, difficulty):
     return None
 
 # Función para generar preguntas de aeropuertos
-def generar_pregunta_aeropuertos(df):
-    row = df.sample(n=1).iloc[0]
+def generar_pregunta_aeropuertos(row):
     question = f"Complete la opcion faltante de los siguientes datos de un aeropuerto\n"
     
     # Definir atributos disponibles para completar y mostrar
-    completable = ("Municipio","Nombre","Provincia","Elevacion","Codigo Iata")
-    showable = ("Municipio","Nombre","Provincia","Elevacion","Codigo Iata")
+    completable = ("Municipio","Nombre","Provincia","Elevación")
+    showable = ("Municipio","Nombre","Provincia","Elevación")
     
     # Seleccionar aleatoriamente el atributo a completar y los mostrados
     complete = random.choice(completable)
@@ -49,7 +48,7 @@ def generar_pregunta_aeropuertos(df):
     
     # Asegurar que el atributo a completar no esté entre los mostrados
     while complete in shown:
-        completar = random.choice (completable)
+        complete = random.choice (completable)
     
     options = {
         "Municipio": "municipality",
@@ -69,13 +68,13 @@ def generar_pregunta_aeropuertos(df):
     return question, correct_answer
 
 # Función para generar preguntas de lagos
-def generar_pregunta_lagos(df):
-    row = df.sample(n=1).iloc[0]
+def generar_pregunta_lagos(row):
+    
     question = f"Complete la opcion faltante de los siguientes datos de un lago\n"
     
     # Definir atributos disponibles para completar y mostrar
     completable = ("Nombre","Provincia")
-    showable = ("Nombre","Provincia","Superficie","Profundidad Maxima (en metros)")
+    showable = ("Nombre","Provincia","Superficie (En km²)","Profundidad Maxima (en metros)")
     
     # Seleccionar aleatoriamente el atributo a completar y los mostrados
     complete = random.choice(completable)
@@ -83,7 +82,7 @@ def generar_pregunta_lagos(df):
     
     # Asegurar que el atributo a completar no esté entre los mostrados
     while complete in shown:
-        completar = random.choice (completable)
+        shown = random.sample (showable, 3)
     
     options = {
         "Nombre": "Nombre",
@@ -102,8 +101,7 @@ def generar_pregunta_lagos(df):
     return question, correct_answer
 
 # Función para generar preguntas de conectividad
-def generar_pregunta_conectividad(df):
-    row = df.sample(n=1).iloc[0]
+def generar_pregunta_conectividad(row):
     question = f"Complete con SI o NO la opcion faltante de la siguiente localidad:\n"
     
     # Definir atributos disponibles para completar y mostrar
@@ -128,7 +126,6 @@ def generar_pregunta_conectividad(df):
     "Tiene 4G?": "4G"
 }
 
-    
     for key in shown:
         question+= f"- {key}: {row[key]}\n"
 
@@ -139,8 +136,7 @@ def generar_pregunta_conectividad(df):
     return question, correct_answer
 
 # Función para generar preguntas del censo 2022
-def generar_pregunta_censo(df):
-    row = df.sample(n=1).iloc[0]
+def generar_pregunta_censo(row):
     question = f"Cual es la provincia que cumple con los siguientes datos?\n"
     
     # Definir atributos disponibles para completar y mostrar
@@ -159,15 +155,34 @@ def generar_pregunta_censo(df):
     
     return question, correct_answer
 
-# Función para generar preguntas basado en el tema
-def generateQuestions(theme, df_aeropuertos, df_lagos, df_conectividad, df_censo):
+# Función para generar preguntas basado en la tematica
+def generateQuestions(theme):
+    base_path = Path(__file__).resolve().parent.parent.parent / 'datasets_custom'
     if theme == "Aeropuertos":
-        return [generar_pregunta_aeropuertos(df_aeropuertos) for _ in range(5)]
+        df = pd.read_csv(base_path / 'ar-airports-custom.csv')
+        return [generar_pregunta_aeropuertos(df.sample(n=1).iloc[0]) for _ in range(5)]
     elif theme == "Lagos":
-        return [generar_pregunta_lagos(df_lagos) for _ in range(5)]
+        df = pd.read_csv(base_path / 'lagos_arg_custom.csv')
+        return [generar_pregunta_lagos(df.sample(n=1).iloc[0]) for _ in range(5)]
     elif theme == "Conectividad":
-        return [generar_pregunta_conectividad(df_conectividad) for _ in range(5)]
+        df = pd.read_csv(base_path / 'Conectividad_Internet.csv')
+        return [generar_pregunta_conectividad(df.sample(n=1).iloc[0]) for _ in range(5)]
     elif theme == "Censo 2022":
-        return [generar_pregunta_censo(df_censo) for _ in range(5)]
+        df = pd.read_csv(base_path / 'Censo_Modificado.csv')
+        return [generar_pregunta_censo(df.sample(n=1).iloc[0]) for _ in range(5)]
     return []
 
+
+if __name__ == "__main__":
+    
+    print ("hola")
+
+    preguntas=generateQuestions ("Censo 2022")
+    
+    if preguntas:
+        for i, pregunta in enumerate(preguntas, start=1):
+            print(f"Pregunta {i}: {pregunta[0]}")
+    else:
+        print("No se generaron preguntas.")
+    
+    

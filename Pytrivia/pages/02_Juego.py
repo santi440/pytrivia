@@ -11,87 +11,124 @@ import numpy as np
 # Título de la página
 st.title('Juego de Trivia')
 
-# Definir la ruta base
-base_path = Path(__file__).resolve().parent.parent.parent
+# Cargar datasets datos y resultado
+base_path = Path(__file__).resolve().parent.parent
+datos_path = base_path / 'csv' / 'datos_formularios.csv'
+resultado_path = base_path / 'csv' / 'resultado.csv'
+datos = pd.read_csv(datos_path)
 
-# Cargar los datasets
-airports_path = base_path / 'datasets_custom' / 'ar-airports-custom.csv'
-aeropuertos = pd.read_csv(airports_path)
+# Crear el session state
 
-lagos_path = base_path / 'datasets_custom' / 'lagos_arg_custom.csv'
-lagos = pd.read_csv(lagos_path)
-
-conec_path = base_path / 'datasets_custom' / 'Conectividad_Internet.csv'
-conectividad = pd.read_csv(conec_path)
-
-censo_path = base_path / 'datasets_custom' / 'Censo_Modificado.csv'
-censo_2022 = pd.read_csv(censo_path)
-
-base_path= Path (__file__).resolve().parent.parent
-datos_path= base_path / 'csv' / 'datos_formularios.csv'
-resultado_path= base_path/ 'csv' / 'resultado.csv'
-datos= pd.read_csv(datos_path)
+if 'user' not in st.session_state:
+    st.session_state.user = None
     
-if(Sesiones.is_user_logged_in()):
-    # Seleccionar usuario
-    user = st.selectbox('Selecciona tu usuario', options= datos['Email'].unique())
-
-    # Seleccionar temática
-    theme = st.selectbox('Selecciona una temática', ['Aeropuertos', 'Lagos', 'Conectividad', 'Censo 2022'])
-
-    # Seleccionar dificultad
-    difficulty = st.selectbox('Selecciona la dificultad', ['Fácil', 'Media', 'Alta'])
-
-    # Explicacion de como funciona cada nivel de dificultad.
-
-    st.info("""
-        **Fácil:** Se proporciona una pista detallada.  
-        **Media:** Se proporciona una pista general.  
-        **Alta:** No se proporciona ninguna pista.
-    """)
+if 'email' not in st.session_state:
+    st.session_state.email= None
     
-    # Generar preguntas basadas en la temática
-    questions = gen.generateQuestions(theme, aeropuertos, lagos, conectividad, censo_2022)
+if 'theme' not in st.session_state:
+    st.session_state.theme = None
+
+if 'difficulty' not in st.session_state:
+    st.session_state.difficulty = None
+
+if 'questions' not in st.session_state:
+    st.session_state.questions = []
+
+if 'user_answers' not in st.session_state:
+    st.session_state.user_answers = []
+
+if 'step' not in st.session_state:
+    st.session_state.step = 'start'
     
-    # Almacenar respuestas del usuario
-    user_answers = []
-    for i, (question, correct_answer) in enumerate(questions):
-        st.write(f"Pregunta {i + 1}:")
-        st.write(question)
-        
-        if difficulty != 'Alta':
-            hint = gen.generate_hint(correct_answer, difficulty)
-            if hint:
-                st.write(f"Pista: {hint}")
+if 'correct_count' not in st.session_state:
+    st.session_state.correct_count= None 
 
-        user_answer = st.text_input(f"Respuesta a la pregunta {i + 1}:")
-        user_answers.append((user_answer, correct_answer))
+if 'points' not in st.session_state:
+    st.session_state.points= None 
 
-    # Empezar con las 5 preguntas del tema elegido, dar la pista correspondiente a la dificultad. Si es dificil no hay pista. Sumar 1 punto por cada respuesta correcta.
+if Sesiones.is_user_logged_in():
+    if st.session_state.step == 'start':
+        # Seleccionar usuario
+        email = st.selectbox('Selecciona tu usuario', options=datos['Email'].unique())
 
-    # Mostrar mensaje que diga Juego completado y la cantidad de respuestas correctas. Si la dificultad es media el puntaje se multiplica por 1.5, si es dificil el puntaje se multiplica x2.
+        # Seleccionar temática
+        theme = st.selectbox('Selecciona una temática', ['Aeropuertos', 'Lagos', 'Conectividad', 'Censo 2022'])
 
-    # Almacenar en resultado_path : - Fecha y hora: momento en el cual se responde la trivia.
-#                                   - Usuario: identificador del usuario.
-#                                   - Email: email del usuario.
-#                                   - Dificultad: dificultad elegida por el usuario.
-#                                   - Temática: temática elegida por el usuario.
-#                                   - Cantidad de respuestas correctas.
-#                                   - Puntos: puntos obetinos en la partida.
+        # Seleccionar dificultad
+        difficulty = st.selectbox('Selecciona la dificultad', ['Fácil', 'Media', 'Alta'])
 
+        # Explicación de niveles de dificultad
+        st.info("""
+            **Fácil:** Se proporciona una pista detallada.  
+            **Media:** Se proporciona una pista general.  
+            **Alta:** No se proporciona ninguna pista.
+        """)
 
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        if st.button("Volver a jugar"):
+        if st.button('Comenzar Juego'):
+            user = datos.loc[datos['Email'] == email, 'Usuario'].values[0]
+            st.session_state.email = email
+            st.session_state.user = user
+            st.session_state.theme = theme
+            st.session_state.difficulty = difficulty
+            st.session_state.questions = gen.generateQuestions(theme)
+            st.session_state.user_answers = []
+            st.session_state.step = 'playing'
             st.rerun()
     
-    with col2:
-        if st.button("Ir al Ranking"):
-            st.switch_page("pages/05_Ranking.py")
+    if st.session_state.step == 'playing':
+        for i, (question, correct_answer) in enumerate(st.session_state.questions):
+            st.write(f"Pregunta {i + 1}:")
+            st.write(question)
 
+            if st.session_state.difficulty != 'Alta':
+                hint = gen.generate_hint(correct_answer, st.session_state.difficulty)
+                if hint:
+                    st.write(f"Pista: {hint}")
 
+            user_answer = st.text_input(f"Respuesta a la pregunta {i + 1}:", key=f"answer_{i}")
+            if user_answer:
+                if len(st.session_state.user_answers) < i + 1:
+                    st.session_state.user_answers.append((user_answer, correct_answer))
+                else:
+                    st.session_state.user_answers[i] = (user_answer, correct_answer)
+
+        if st.button("Enviar respuestas"):
+            correct_count, points = gen.check_points(st.session_state.user_answers, st.session_state.difficulty)
+
+            st.session_state.correct_count = correct_count
+            st.session_state.points= points
+            
+            # Almacenar resultados
+            new_result = {
+                'Fecha y hora': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                'Usuario': st.session_state.user,
+                'Email': st.session_state.email,
+                'Dificultad': st.session_state.difficulty,
+                'Temática': st.session_state.theme,
+                'Cantidad de respuestas correctas': correct_count,
+                'Puntos': points
+            }
+            results_df = pd.read_csv(resultado_path)
+            results_df = pd.concat([results_df, pd.DataFrame([new_result])], ignore_index=True)
+            results_df.to_csv(resultado_path, index=False)
+
+            st.write("Resultados guardados exitosamente.")
+            st.session_state.step = 'completed'
+            st.rerun()
+    
+    if st.session_state.step == 'completed':
+        st.write(f"Juego completado. Respuestas correctas: {st.session_state.correct_count}. Puntos obtenidos: {st.session_state.points}.")
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("Volver a jugar"):
+                st.session_state.step = 'start'
+                st.experimental_rerun()
+        
+        with col2:
+            if st.button("Ir al Ranking"):
+                st.switch_page("pages/05_Ranking.py")
 else:
-    st.subheader("Antes de jugar, debes Registrarte o Iniciar Sesion")
-    if (st.button('Registrarse')):
+    st.subheader("Antes de jugar, debes Registrarte o Iniciar Sesión")
+    if st.button('Registrarse'):
         st.switch_page("pages/03_Formulario de Registro.py")
