@@ -35,13 +35,29 @@ Además, para un análisis más exhaustivo podra pasar por los distintos archivo
 - datasets_custom: Contiene los conjuntos de datos procesados.
 - procesamiento: Contiene el Jupyter Notebook utilizados para el procesamiento y las funciones que se requieran para ello en la subcarpeta "funciones".
 - consultas: Contiene los Jupyter Notebooks utilizados para el análisis de datos y las funciones que se requieran para ello en la subcarpeta "funciones".
-- Pytrivia: Contiene el conjunto de archivos que componen la página web.
+
+- Pytrivia: Contiene el conjunto de archivos que componen la página web del juego. Organización:
+    - Csv: Contiene los datasets con la información de los usuarios(datos_formularios) y de las jugadas(resultado).
+    - FuncionesDatos: Archivos con las funciones para generar los gráficos en la página de Datos.
+    - FuncionesEstadisticas: Archivos con las funciones para generar los gráficos / lógica de las opciones presentadas en Estadísticas.
+    - FuncionesJuego: Archivos con las funciones para generar la lógica detrás del juego.
+    - FuncionesSesion: Archivos con las funciones para crear y administrar las sesiones de los usuarios.
+    - pages: Las diferentes páginas del sitio web, que utilizan todas las funciones explicadas anteriormente.
+    - Inicio: La página principal del sitio. Aquella que da la introducción y que recibe a los usuarios.
+
 - README.md: Este archivo que proporciona información sobre el proyecto y cómo ejecutarlo.
 - LICENSE: Archivo que contiene la licencia del código.
 
-## Funcionalidades Implementadas
+## Funcionalidades Implementadas en la Primera Etapa
 - Procesamiento de Datasets: Se realizaron operaciones de limpieza y transformación en los conjuntos de datos proporcionados.
 - Interfaz Gráfica: Se ha desarrollado una interfaz gráfica utilizando Streamlit.
 - Formulario de Registro: Se ha implementado un formulario de registro para que los usuarios puedan registrarse en el sistema.
 
-¡Gracias por visitar nuestro repositorio! Si tiene alguna pregunta o sugerencia, no dude en comunicarse con nosotros.
+## Funcionalidades Implementadas en la Segunda Etapa
+- Pagina Inicio: Página de bienvenida con información del juego y su funcionamiento.
+- Página Conociendo nuestros datos: Visualización de datos con gráficos y mapas basados en los datasets.
+- Página de Juego: Juego de trivia con selección de usuario, temática y dificultad. Generación de preguntas aleatorias y cálculo de puntaje.
+- Página Ranking: Visualización del ranking de mejores resultados y detalle de la partida jugada.
+- Página Estadísticas sobre las jugadas: Visualización de estadísticas del juego y rendimiento de los usuarios.
+
+¡Gracias por visitar nuestro repositorio! Si tiene alguna pregunta o sugerencia, no dude en comunicarse con nosotros. ¡Esperamos que disfruten del juego!
