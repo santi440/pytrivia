@@ -154,7 +154,7 @@ def generateQuestions(theme):
     
     if theme == "Aeropuertos":
         df = pd.read_csv(base_path / 'ar-airports-custom.csv')
-        df = df.dropna(subset=["municipality", "name", "prov_name","elevation_name","iata_code"])  # Filtrar filas con valores nulos
+        df = df.dropna()  # Filtrar filas con valores nulos
         
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -163,10 +163,10 @@ def generateQuestions(theme):
             used_rows.append(row.name)
             question, answer = generar_pregunta_aeropuertos(row)
             questions_and_answers.append((question, answer))
-            
+    
     elif theme == "Lagos":
         df = pd.read_csv(base_path / 'lagos_arg_custom.csv')
-        df = df.dropna(subset=["Nombre", "Ubicación", "Superficie (km²)","Profundidad máxima (m)"])  # Filtrar filas con valores nulos
+        df = df.dropna()  # Filtrar filas con valores nulos
         
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -175,12 +175,11 @@ def generateQuestions(theme):
             used_rows.append(row.name)
             question, answer = generar_pregunta_lagos(row)
             questions_and_answers.append((question, answer))
-            
-            
+    
     elif theme == "Conectividad":
         df = pd.read_csv(base_path / 'Conectividad_Internet.csv')
         df = df.dropna()  # Filtrar filas con valores nulos
-        
+
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
             while row.name in used_rows:
@@ -191,7 +190,7 @@ def generateQuestions(theme):
     
     elif theme == "Censo 2022":
         df = pd.read_csv(base_path / 'Censo_Modificado.csv')
-        df = df.dropna(subset=["Total de población","Población en situación de calle(²)","Porcentaje de población en situación de calle","Mujeres Total de población","Varones Total de población"])  # Filtrar filas con valores nulos
+        df = df.dropna()  # Filtrar filas con valores nulos
 
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -205,7 +204,7 @@ def generateQuestions(theme):
     
 if __name__ == "__main__":
     print("Hola")
-    preguntas = generateQuestions("Censo 2022")
+    preguntas = generateQuestions("Aeropuertos")
     if preguntas:
         for i, (pregunta, respuesta) in enumerate(preguntas, start=1):
             print(f"Pregunta {i}: {pregunta}")

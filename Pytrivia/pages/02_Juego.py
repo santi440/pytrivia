@@ -123,7 +123,7 @@ if Sesiones.is_user_logged_in():
         with col1:
             if st.button("Volver a jugar"):
                 st.session_state.step = 'start'
-                st.experimental_rerun()
+                st.rerun()
         
         with col2:
             if st.button("Ir al Ranking"):
