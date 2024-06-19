@@ -3,6 +3,23 @@ import random
 import numpy as np
 from pathlib import Path
 from unidecode import unidecode
+from streamlit_autorefresh import st_autorefresh
+from datetime import datetime, timedelta
+import streamlit as st
+
+def set_timer(amount):
+    st.session_state.start_time = datetime.now()
+    st.session_state.end_time = st.session_state.start_time + timedelta(minutes= amount)
+
+def timer_count():
+    st_autorefresh(interval=1000)
+    if st.session_state.end_time:
+        remaining_time = st.session_state.end_time - datetime.now()
+        if remaining_time.total_seconds() > 0:
+            minutes, seconds = divmod(int(remaining_time.total_seconds()), 60)
+            st.write(f"Tiempo restante: {minutes:02d}:{seconds:02d}")
+        else:
+            st.session_state.step = 'completed'
 
 # Función para verificar puntos
 def check_points(answers, diff):
@@ -93,6 +110,7 @@ def generar_pregunta_lagos(row):
 
 # Función para generar preguntas de conectividad
 def generar_pregunta_conectividad(row):
+
     question = f"Complete con SI o NO la opcion faltante de la siguiente localidad:\n"
     
     # Definir atributos disponibles para completar y mostrar
@@ -188,7 +206,21 @@ def generateQuestions(theme):
             used_rows.append(row.name)
             question, answer = generar_pregunta_conectividad(row)
             questions_and_answers.append((question, answer))
-    
+        
+        difficulty = st.session_state.difficulty
+
+        if not difficulty:
+            st.warning("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
+        match difficulty:
+            case 'Fácil':
+                amount = 5
+            case 'Media':
+                amount = 3
+            case 'Alta' : 
+                amount = 1
+        set_timer(amount)
+
     elif theme == "Censo 2022":
         df = pd.read_csv(base_path / 'Censo_Modificado.csv')
         df = df.dropna(subset=["Total de población","Población en situación de calle(²)","Porcentaje de población en situación de calle","Mujeres Total de población","Varones Total de población"])  # Filtrar filas con valores nulos

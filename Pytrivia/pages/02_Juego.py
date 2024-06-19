@@ -2,11 +2,13 @@ import streamlit as st
 import pandas as pd
 import random
 import time
+from datetime import datetime, timedelta
 from datetime import datetime
 from pathlib import Path
 from FuncionesJuego import generadores as gen
 from FuncionesSesion import Sesiones
 import numpy as np
+from streamlit_autorefresh import st_autorefresh
 
 # Título de la página
 st.title('Juego de Trivia')
@@ -43,6 +45,13 @@ if 'correct_count' not in st.session_state:
 if 'points' not in st.session_state:
     st.session_state.points= None 
 
+if 'start_time' not in st.session_state:
+    st.session_state.start_time = None
+
+if 'end_time' not in st.session_state:
+    st.session_state.end_time = None
+
+
 if Sesiones.is_user_logged_in():
     if st.session_state.step == 'start':
         # Seleccionar usuario
@@ -76,6 +85,9 @@ if Sesiones.is_user_logged_in():
             st.rerun()
     
     if st.session_state.step == 'playing':
+
+        if(st.session_state.theme == 'Conectividad'):
+            gen.timer_count()
         for i, (question, correct_answer) in enumerate(st.session_state.questions):
             st.write(f"Pregunta {i + 1}:")
             st.write(question)
@@ -124,7 +136,6 @@ if Sesiones.is_user_logged_in():
             if st.button("Volver a jugar"):
                 st.session_state.step = 'start'
                 st.rerun()
-        
         with col2:
             if st.button("Ir al Ranking"):
                 st.switch_page("pages/05_Ranking.py")
