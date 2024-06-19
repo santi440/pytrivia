@@ -2,7 +2,6 @@ import streamlit as st
 import csv
 import pathlib
 
-from FuncionesSesion import Sesiones
 from datetime import date
 
 
@@ -73,5 +72,3 @@ with st.form("my_form"):
             save_form_csv(username, full_name, email, birth_date, gender)
             st.success("Formulario enviado con éxito!")
             
-st.title("Inicio de Sesion")
-Sesiones.login_form()

@@ -16,6 +16,7 @@ def login_form():
         email = df_user.loc[df_user['Usuario'] == usuario_seleccionado, 'Email'].iloc[0]
         st.session_state.email = email
         st.success(f"¡Inicio de sesión exitoso como {usuario_seleccionado}!")
+        st.rerun()
 
 def get_logged_in_user():
     """

@@ -129,6 +129,8 @@ if Sesiones.is_user_logged_in():
             if st.button("Ir al Ranking"):
                 st.switch_page("pages/05_Ranking.py")
 else:
-    st.subheader("Antes de jugar, debes Registrarte o Iniciar Sesión")
+    st.subheader("Antes de jugar, debes Iniciar Sesión")
+    Sesiones.login_form()
+    st.subheader("¿No tienes usuario?, Regístrate")
     if st.button('Registrarse'):
         st.switch_page("pages/03_Formulario de Registro.py")
