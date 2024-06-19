@@ -20,7 +20,6 @@ st.header("Los mejores 15 jugadores")
 df_filtrado_display = df_filtrado.head(15).set_index('Posición')
 st.table(df_filtrado_display)
 
-#st.table(df_filtrado.head(15).drop(columns='Email').style.hide(axis='index'))
 
 user = Sesiones.get_logged_in_user()
 

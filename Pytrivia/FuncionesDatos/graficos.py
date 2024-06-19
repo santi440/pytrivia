@@ -48,6 +48,9 @@ def airport_map (df_airports,elevation,mapa):
 
 
 def graph_airport_size (df_airports):
+    """
+    Recibe el DataFrame con la información de los aeropuertos y genera un gráfico de torta mostrando la proporción de aeropuertos por tamaño.
+    """
      # Diccionario de mapeo de los nombres actuales a los nuevos nombres deseados
     type_mapping = {
         'large_airport': 'Aeropuerto Grande',
@@ -68,6 +71,10 @@ def graph_airport_size (df_airports):
 
 
 def bar_airport_elevation (df_airports):
+    """
+    Recibe el DataFrame con la información de los aeropuertos y genera un gráfico de barras horizontales mostrando la elevación promedio de los aeropuertos por provincia.
+    """
+
     df_airports = df_airports.groupby('prov_name')['elevation_ft'].mean().sort_values() # Calcula la media de los valores de elevation_ft para cada grupo (provincia) y se ordenan con sort
     df_airports.plot(kind='barh', xlabel='Elevacion', ylabel='Provincia', title='Elevacion promedio de aeropuertos por Provincia', figsize = (7,15), colormap = 'viridis')
     st.pyplot(plt.gcf())
@@ -79,6 +86,10 @@ def bar_airport_elevation (df_airports):
 
 
 def _add_marker_lake(row,mapa):
+    """
+    Agrega un marcador en el mapa basado en la información de una fila de DataFrame de lagos.
+    Recibe la fila del DataFrame y el Mapa para agregar el marcador (row,mapa).
+    """
     folium.Marker(
         [row['Latitud(GD)'], row['Longitud(GD)']],
         popup= row['Nombre'],
@@ -86,12 +97,21 @@ def _add_marker_lake(row,mapa):
     ).add_to(mapa)
 
 def lakes_map (df_lakes,mapa):
+    """
+    Genera un mapa de lagos con marcadores.
+    Recibe el DataFrame con la información de los lagos y el mapa para agregar todos los marcadores (df_lakes,mapa).
+    Retorna el mapa con todos los marcadores.
+    """
     df_lakes = df_lakes[['Nombre','Latitud(GD)','Longitud(GD)']]
     df_lakes.apply(lambda row: _add_marker_lake(row,mapa), axis = 1)
     return mapa
 
 
 def _separate_lake(df_lakes):
+    """
+    Separa la información del lago Nahuel Huapi en dos filas, una para cada provincia (Río Negro y Neuquén).
+    Recibe el DataFrame con la información de los lagos y lo retorna agregando las filas correspondientes al lago Nahuel Huapi para cada provincia.
+    """
     nahuel_huapi_row = df_lakes[df_lakes['Nombre'] == 'Lago Nahuel Huapi']
 
     row_rio_negro = nahuel_huapi_row.copy()
@@ -105,6 +125,10 @@ def _separate_lake(df_lakes):
     return pd.concat([df_lakes, row_rio_negro, row_neuquen], ignore_index=True) #concateno y reestablezco el indice del dataframe
 
 def bar_lakes_depth (df_lakes):
+    """
+    Recibe el DataFrame con la información de los lagos y genera un gráfico de barras horizontales mostrando la profundidad promedio de los lagos por provincia.
+
+    """
 
     df_lakes = _separate_lake(df_lakes)
 
@@ -114,6 +138,9 @@ def bar_lakes_depth (df_lakes):
 
 
 def graph_provinces_lakes (df_lakes):
+    """
+    Recibe el DataFrame con la información de los lagos y genera un gráfico de torta mostrando el porcentaje de lagos por provincia.
+    """
     df_lakes = _separate_lake(df_lakes)
     
     # Agrupar por 'Ubicación' (provincia) y contar la cantidad de lagos por provincia
