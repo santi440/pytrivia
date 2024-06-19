@@ -30,3 +30,23 @@ if user is not None and not user.empty:
     if not usuario.empty:
         st.subheader('Tu puntaje')
         st.table(usuario)
+
+
+if st.session_state.get('step') == 'completed':
+    st.subheader("Última Partida Jugada")
+    st.write(f"Respuestas correctas: {st.session_state['correct_count']}. Puntos obtenidos: {st.session_state['points']}")
+
+    answers = st.session_state['user_answers']
+
+    if answers:
+        # Crear un DataFrame con las respuestas y las respuestas correctas
+        data = {
+            'Pregunta': [f"Pregunta {i + 1}" for i in range(len(answers))],
+            'Tu Respuesta': [answer for answer, correct_answer in answers],
+            'Respuesta Correcta': [correct_answer for answer, correct_answer in answers]
+        }
+        df = pd.DataFrame(data)
+        
+        # Mostrar la tabla de las respuestas
+        st.write("Respuestas de la última partida:")
+        st.table(df)
