@@ -39,4 +39,7 @@ with st.form("my_form"):
             st.error("Ingrese una fecha válida.")
         else:
             save_form_csv(username, full_name, email, birth_date, gender)
+            st.session_state.email= email
+            st.session_state.user= username
             st.success("Formulario enviado con éxito!")
+            

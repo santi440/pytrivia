@@ -51,13 +51,13 @@ if 'start_time' not in st.session_state:
 if 'end_time' not in st.session_state:
     st.session_state.end_time = None
 
+if 'email' not in st.session_state:
+    st.session_state.email= None
 
 if Sesiones.is_user_logged_in():
     if st.session_state.step == 'start':
         # Seleccionar usuario
-        full_user = Sesiones.get_logged_in_user()
-        email = full_user['Email'].values[0]
-        user = full_user['Usuario'].values[0]
+        user = st.session_state.user
 
         st.write(f"¿Estás listo para jugar {user}?")
 
@@ -84,7 +84,6 @@ if Sesiones.is_user_logged_in():
         """)
 
         if st.button('Comenzar Juego'):
-            st.session_state.email = email
             st.session_state.user = user
             st.session_state.theme = theme
             st.session_state.difficulty = difficulty
@@ -92,6 +91,12 @@ if Sesiones.is_user_logged_in():
             st.session_state.user_answers = []
             st.session_state.step = 'playing'
             st.rerun()
+        
+        if st.button ('Cerrar Sesión'):
+                st.session_state.email= None
+                st.session_state.user= None
+                st.session_state.step = 'start'
+                st.rerun()
     
     if st.session_state.step == 'playing':
 
@@ -149,9 +154,17 @@ if Sesiones.is_user_logged_in():
         with col2:
             if st.button("Ir al Ranking"):
                 st.switch_page("pages/05_Ranking.py")
+            if st.button ('Cerrar Sesión'):
+                st.session_state.email= None
+                st.session_state.user= None
+                st.session_state.step = 'start'
+                st.rerun()
 else:
     st.subheader("Antes de jugar, debes Iniciar Sesión")
+    st.write ("Si su usuario ya esta registrado y no aparece, porfavor espere. Streamlit puede presentar DELAY      : ) ")
+    st.write ("Puede probar recargando la pagina.")
     Sesiones.login_form()
     st.subheader("¿No tienes usuario?, Regístrate")
     if st.button('Registrarse'):
         st.switch_page("pages/03_Formulario de Registro.py")
+    

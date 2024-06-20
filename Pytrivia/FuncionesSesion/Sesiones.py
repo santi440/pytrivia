@@ -12,12 +12,15 @@ def login_form():
     st.write("### Inicio de Sesión")
     usuario_seleccionado = st.selectbox("Selecciona tu usuario", options=df_user['Usuario'])
     if st.button("Iniciar Sesión"):
-        # Obtener el email asociado al usuario seleccionado
-        email = df_user.loc[df_user['Usuario'] == usuario_seleccionado, 'Email'].iloc[0]
-        st.session_state.email = email
-        st.success(f"¡Inicio de sesión exitoso como {usuario_seleccionado}!")
-        st.rerun()
-
+        try:
+            # Obtener el email asociado al usuario seleccionado
+            email = df_user.loc[df_user['Usuario'] == usuario_seleccionado, 'Email'].iloc[0]
+            st.session_state.email = email
+            st.success(f"¡Inicio de sesión exitoso como {usuario_seleccionado}!")
+            st.rerun()
+        except IndexError:
+            st.write("Si no tiene un usuario, debe registrarse.")
+        
 def get_logged_in_user():
     """
     Retorna el usuario que está cargado en el session_state, si no hay usuario cargado, retorna None
@@ -33,4 +36,8 @@ def is_user_logged_in():
     """
     Retorna si el email está cargado en el session_state
     """
-    return 'email' in st.session_state
+    if st.session_state.email != None:
+        return True
+    else:
+        return False
+    
