@@ -11,6 +11,10 @@ def graficar_porcentaje(game):
                 None
     """
     df_result = pd.read_csv(game)
+    # Revisa si tiene informacion el DataFrame e imprime si esta vacio
+    if df_result.empty:
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
+        return
 
     # Calcular los percentiles
     percentile_50 = df_result["Puntos"].quantile(0.5)

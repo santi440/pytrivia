@@ -14,6 +14,11 @@ def graficar_genero(game,players):
     
     registered_players = pd.read_csv(players)   
     
+    # Revisa si tiene informacion el DataFrame e imprime si esta vacio
+    if registered_players.empty:
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
+        return
+    
     df_result = pd.read_csv(game)
     
     # saco un listado de los jugadores (email) que jugaron 
