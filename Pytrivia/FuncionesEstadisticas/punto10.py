@@ -1,7 +1,6 @@
 import pandas as pd
 from datetime import datetime, timedelta
 import streamlit as st
-from pathlib import Path
 
 def usuarios_en_racha(plays_route):
     '''

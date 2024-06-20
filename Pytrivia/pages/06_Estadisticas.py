@@ -1,6 +1,5 @@
 import streamlit as st
 import FuncionesEstadisticas as fe
-import matplotlib.pyplot as plt
 from pathlib import Path
 
 file_game = Path('..','Pytrivia','csv','resultado.csv')

@@ -1,13 +1,10 @@
 import streamlit as st
 import pandas as pd
-import random
-import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from datetime import datetime
 from pathlib import Path
 from FuncionesJuego import generadores as gen
 from FuncionesSesion import Sesiones
-import numpy as np
 from streamlit_autorefresh import st_autorefresh
 
 # Título de la página

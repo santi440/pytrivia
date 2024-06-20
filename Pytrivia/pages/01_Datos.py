@@ -1,7 +1,6 @@
 from FuncionesDatos import graficos as func
 import streamlit as st
 import pandas as pd
-import matplotlib as plt
 from pathlib import Path
 from streamlit_folium import folium_static
 import folium

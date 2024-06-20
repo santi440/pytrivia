@@ -1,6 +1,5 @@
 import streamlit as st
 from FuncionesSesion import Sesiones
-import pandas as pd
 
 if 'email' not in st.session_state:
     st.session_state.email = None
