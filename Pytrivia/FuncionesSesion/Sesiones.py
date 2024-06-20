@@ -34,7 +34,7 @@ def get_logged_in_user():
     
 def is_user_logged_in():
     """
-    Retorna si el email está cargado en el session_state
+    Retorna true si el email es diferente de None en el session_state
     """
     if st.session_state.email != None:
         return True

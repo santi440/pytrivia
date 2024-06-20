@@ -6,6 +6,7 @@ from streamlit_autorefresh import st_autorefresh
 from datetime import datetime, timedelta
 import streamlit as st
 
+
 def set_timer(amount):
     """
     Establece un temporizador para una cantidad de minutos especificada.
@@ -15,6 +16,7 @@ def set_timer(amount):
     """
     st.session_state.start_time = datetime.now()
     st.session_state.end_time = st.session_state.start_time + timedelta(minutes=amount)
+
 
 def timer_count():
     """
@@ -31,6 +33,7 @@ def timer_count():
         else:
             st.session_state.step = 'completed'
 
+
 def check_points(answers, diff):
     """
     Verifica la cantidad de respuestas correctas y calcula los puntos obtenidos según la dificultad.
@@ -44,7 +47,9 @@ def check_points(answers, diff):
     """
     points = 0
     for answer in answers:
-        if unidecode(answer[0].lower().replace(" ", "")) == unidecode(str(answer[1]).lower().replace(" ", "")):
+        if unidecode(answer[0].lower().replace(" ", "")) == unidecode(
+            str(answer[1]).lower().replace(" ", "")
+        ):
             points += 1
     cant = points
     if diff == 'Media':
@@ -52,6 +57,7 @@ def check_points(answers, diff):
     elif diff == 'Alta':
         points = points * 2
     return cant, points
+
 
 def generate_hint(answer, difficulty, theme):
     """
@@ -74,6 +80,7 @@ def generate_hint(answer, difficulty, theme):
             return f"La respuesta comienza con '{answer[0]}'"
     return None
 
+
 def generar_pregunta_aeropuertos(row):
     """
     Genera una pregunta sobre datos de un aeropuerto para completar.
@@ -84,30 +91,31 @@ def generar_pregunta_aeropuertos(row):
     Returns:
     - Tuple: (Pregunta, Respuesta correcta).
     """
-    question = f"Complete la opción faltante de los siguientes datos de un aeropuerto\n"
-    
+    question = "Complete la opción faltante de los siguientes datos de un aeropuerto\n"
+
     completable = ("Municipio", "Provincia")
     shown = ["Municipio", "Nombre", "Provincia", "Elevación"]
-    
+
     complete = random.choice(completable)
     shown.remove(complete)
-    
+
     options = {
         "Municipio": "municipality",
         "Nombre": "name",
         "Provincia": "prov_name",
         "Elevación": "elevation_name",
-        "Código IATA": "iata_code"
+        "Código IATA": "iata_code",
     }
-    
+
     for key in shown:
         question += f"- {key}: {row[options[key]]}\n"
-    
+
     question += f"- {complete}: ???????"
-        
+
     correct_answer = row[options[complete]]
-    
+
     return question, correct_answer
+
 
 def generar_pregunta_lagos(row):
     """
@@ -119,32 +127,33 @@ def generar_pregunta_lagos(row):
     Returns:
     - Tuple: (Pregunta, Respuesta correcta).
     """
-    question = f"Complete la opción faltante de los siguientes datos de un lago\n"
-    
+    question = "Complete la opción faltante de los siguientes datos de un lago\n"
+
     completable = ("Nombre", "Provincia")
     showable = ("Nombre", "Provincia", "Superficie (En km²)", "Profundidad Maxima (en metros)")
-    
+
     complete = random.choice(completable)
     shown = random.sample(showable, 3)
-    
+
     while complete in shown:
         shown = random.sample(showable, 3)
-    
+
     options = {
         "Nombre": "Nombre",
         "Provincia": "Ubicación",
         "Superficie (En km²)": "Superficie (km²)",
-        "Profundidad Maxima (en metros)": "Profundidad máxima (m)"
+        "Profundidad Maxima (en metros)": "Profundidad máxima (m)",
     }
-    
+
     for key in shown:
         question += f"- {key}: {row[options[key]]}\n"
 
     question += f"- {complete}: ???????"
-    
+
     correct_answer = row[options[complete]]
-    
+
     return question, correct_answer
+
 
 def generar_pregunta_conectividad(row):
     """
@@ -156,18 +165,25 @@ def generar_pregunta_conectividad(row):
     Returns:
     - Tuple: (Pregunta, Respuesta correcta).
     """
-    question = f"Complete con SI o NO la opción faltante de la siguiente localidad:\n"
-    
+    question = "Complete con SI o NO la opción faltante de la siguiente localidad:\n"
+
     completable = (
-        "Tiene ADSL?", "Tiene CABLE MODEM?", "Tiene DIALUP?", "Tiene FIBRA OPTICA?", 
-        "Tiene SEÑAL SATELITAL?", "Tiene WIFI?", "Tiene TELEFONIA FIJA?", "Tiene 3G?", "Tiene 4G?"
+        "Tiene ADSL?",
+        "Tiene CABLE MODEM?",
+        "Tiene DIALUP?",
+        "Tiene FIBRA OPTICA?",
+        "Tiene SEÑAL SATELITAL?",
+        "Tiene WIFI?",
+        "Tiene TELEFONIA FIJA?",
+        "Tiene 3G?",
+        "Tiene 4G?",
     )
 
     showable = ("Provincia", "Partido", "Localidad")
-    
+
     complete = random.choice(completable)
     shown = showable
-    
+
     options = {
         "Tiene ADSL?": "ADSL",
         "Tiene CABLE MODEM?": "CABLEMODEM",
@@ -177,17 +193,18 @@ def generar_pregunta_conectividad(row):
         "Tiene WIFI?": "WIRELESS",
         "Tiene TELEFONIA FIJA?": "TELEFONIAFIJA",
         "Tiene 3G?": "3G",
-        "Tiene 4G?": "4G"
+        "Tiene 4G?": "4G",
     }
 
     for key in shown:
         question += f"- {key}: {row[key]}\n"
 
     question += f"- {complete}:  ¿Si o No?"
-    
+
     correct_answer = row[options[complete]]
-    
+
     return question, correct_answer
+
 
 def generar_pregunta_censo(row):
     """
@@ -199,27 +216,30 @@ def generar_pregunta_censo(row):
     Returns:
     - Tuple: (Pregunta, Respuesta correcta).
     """
-    question = f"Cual es la provincia que cumple con los siguientes datos?\n"
-    
+    question = "Cual es la provincia que cumple con los siguientes datos?\n"
+
     showable = (
-        "Total de población", "Población en situación de calle(²)", 
-        "Porcentaje de población en situación de calle", "Mujeres Total de población", 
-        "Varones Total de población"
+        "Total de población",
+        "Población en situación de calle(²)",
+        "Porcentaje de población en situación de calle",
+        "Mujeres Total de población",
+        "Varones Total de población",
     )
-    
+
     complete = "Jurisdicción"
     shown = random.sample(showable, 3)
-    
+
     for key in shown:
         question += f"- {key}: {row[key]}\n"
-    
+
     question += f"- Provincia: ???????"
-        
+
     correct_answer = row[complete]
-    
+
     return question, correct_answer
 
-def generateQuestions(theme):
+
+def generate_questions(theme):
     """
     Genera 5 preguntas basadas en la temática seleccionada.
 
@@ -232,11 +252,11 @@ def generateQuestions(theme):
     base_path = Path(__file__).resolve().parent.parent.parent / 'datasets_custom'
     questions_and_answers = []
     used_rows = []
-    
+
     if theme == "Aeropuertos":
         df = pd.read_csv(base_path / 'ar-airports-custom.csv')
         df = df.dropna(subset=["municipality", "name", "prov_name", "elevation_name", "iata_code"])
-        
+
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
             while row.name in used_rows:
@@ -244,11 +264,11 @@ def generateQuestions(theme):
             used_rows.append(row.name)
             question, answer = generar_pregunta_aeropuertos(row)
             questions_and_answers.append((question, answer))
-            
+
     elif theme == "Lagos":
         df = pd.read_csv(base_path / 'lagos_arg_custom.csv')
         df = df.dropna(subset=["Nombre", "Ubicación", "Superficie (km²)", "Profundidad máxima (m)"])
-        
+
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
             while row.name in used_rows:
@@ -256,11 +276,11 @@ def generateQuestions(theme):
             used_rows.append(row.name)
             question, answer = generar_pregunta_lagos(row)
             questions_and_answers.append((question, answer))
-            
+
     elif theme == "Conectividad":
         df = pd.read_csv(base_path / 'Conectividad_Internet.csv')
         df = df.dropna()
-        
+
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
             while row.name in used_rows:
@@ -268,7 +288,7 @@ def generateQuestions(theme):
             used_rows.append(row.name)
             question, answer = generar_pregunta_conectividad(row)
             questions_and_answers.append((question, answer))
-        
+
         difficulty = st.session_state.difficulty
 
         match difficulty:
@@ -276,13 +296,19 @@ def generateQuestions(theme):
                 amount = 5
             case 'Media':
                 amount = 3
-            case 'Alta' : 
+            case 'Alta':
                 amount = 1
         set_timer(amount)
 
     elif theme == "Censo 2022":
-        df = pd.read_csv(base_path / 'Censo_Modificado.csv') 
-        df = df.dropna(subset=["Total de población", "Población en situación de calle(²)", "Porcentaje de población en situación de calle", "Mujeres Total de población", "Varones Total de población"])
+        df = pd.read_csv(base_path / 'Censo_Modificado.csv')
+        df = df.dropna(subset=[
+            "Total de población",
+            "Población en situación de calle(²)",
+            "Porcentaje de población en situación de calle",
+            "Mujeres Total de población",
+            "Varones Total de población",
+        ])
 
         for _ in range(5):
             row = df.sample(n=1).iloc[0]
@@ -291,5 +317,5 @@ def generateQuestions(theme):
             used_rows.append(row.name)
             question, answer = generar_pregunta_censo(row)
             questions_and_answers.append((question, answer))
-            
+
     return questions_and_answers
