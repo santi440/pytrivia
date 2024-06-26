@@ -59,26 +59,22 @@ def check_points(answers, diff):
     return cant, points
 
 
-def generate_hint(answer, difficulty, theme):
+def generate_hint(answer, difficulty):
     """
     Genera una pista basada en la respuesta y la dificultad.
 
     Parameters:
     - answer: Tupla (respuesta dada, respuesta esperada).
     - difficulty: Dificultad de la pregunta ('Fácil', 'Media').
-    - theme: Tema de la pregunta.
 
     Returns:
-    - str or None: Pista generada o None si no se genera pista.
+    - str: Pista generada.
     """
-    if theme == "Conectividad":
-        return None
-    else:
-        if difficulty == "Fácil":
-            return f"La respuesta comienza con '{answer[0]}' y termina con '{answer[-1]}'"
-        elif difficulty == "Media":
-            return f"La respuesta comienza con '{answer[0]}'"
-    return None
+
+    if difficulty == "Fácil":
+        return f"La respuesta comienza con '{answer[0]}' y termina con '{answer[-1]}'"
+    else: 
+        return f"La respuesta comienza con '{answer[0]}'"
 
 
 def generar_pregunta_aeropuertos(row):

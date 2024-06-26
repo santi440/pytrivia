@@ -50,7 +50,7 @@ if 'email' not in st.session_state:
 
 if Sesiones.is_user_logged_in():
     if st.session_state.step == 'start':
-        # Seleccionar usuario
+        #Se guarda en la variable user el nombre del usuario y se saluda. 
         user = st.session_state.user
         st.write(f"¿Estás listo para jugar {user}?")
 
@@ -82,7 +82,6 @@ if Sesiones.is_user_logged_in():
         """)
 
         if st.button('Comenzar Juego'):
-            st.session_state.user = user
             st.session_state.theme = theme
             st.session_state.difficulty = difficulty
             st.session_state.questions = gen.generate_questions(theme)
@@ -105,13 +104,15 @@ if Sesiones.is_user_logged_in():
             st.write(question)
 
             if st.session_state.difficulty != 'Alta':
-                hint = gen.generate_hint(
-                    correct_answer, st.session_state.difficulty, st.session_state.theme
-                )
-                if hint:
+                if st.session_state.theme != "Conectividad":
+                    hint = gen.generate_hint(correct_answer, st.session_state.difficulty)
                     st.write(f"Pista: {hint}")
 
+
+            # Guardo todas las respuestas en una variable. (Para poder hacerlo en el for utilizo el parametro opcional "key").
             user_answer = st.text_input(f"Respuesta a la pregunta {i + 1}:", key=f"answer_{i}")
+            
+            # Este if permite que cada respuesta quede matcheada con su pregunta sin importar si una pregunta queda sin responder.
             if user_answer:
                 if len(st.session_state.user_answers) < i + 1:
                     st.session_state.user_answers.append((user_answer, correct_answer))
