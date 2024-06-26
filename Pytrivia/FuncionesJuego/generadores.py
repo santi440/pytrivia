@@ -126,13 +126,10 @@ def generar_pregunta_lagos(row):
     question = "Complete la opción faltante de los siguientes datos de un lago\n"
 
     completable = ("Nombre", "Provincia")
-    showable = ("Nombre", "Provincia", "Superficie (En km²)", "Profundidad Maxima (en metros)")
+    shown = ("Nombre", "Provincia", "Superficie (En km²)", "Profundidad Maxima (en metros)")
 
     complete = random.choice(completable)
-    shown = random.sample(showable, 3)
-
-    while complete in shown:
-        shown = random.sample(showable, 3)
+    shown.remove (complete)
 
     options = {
         "Nombre": "Nombre",

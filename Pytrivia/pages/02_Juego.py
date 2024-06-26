@@ -28,7 +28,7 @@ if 'questions' not in st.session_state:
     st.session_state.questions = []
 
 if 'user_answers' not in st.session_state:
-    st.session_state.user_answers = [(None, None)] * 5
+    st.session_state.user_answers = [(None, None) * 5]
 
 if 'step' not in st.session_state:
     st.session_state.step = 'start'
@@ -84,7 +84,6 @@ if Sesiones.is_user_logged_in():
             st.session_state.theme = theme
             st.session_state.difficulty = difficulty
             st.session_state.questions = gen.generate_questions(theme)
-            st.session_state.user_answers = [(None, None)] * 5
             st.session_state.step = 'playing'
             st.rerun()
 
@@ -99,6 +98,7 @@ if Sesiones.is_user_logged_in():
             gen.timer_count()
 
         for i, (question, correct_answer) in enumerate(st.session_state.questions):
+            st.session_state.user_answers[i] = ('Sin respuesta', correct_answer)
             st.write(f"Pregunta {i + 1}:")
             st.write(question)
 
@@ -122,29 +122,29 @@ if Sesiones.is_user_logged_in():
             st.session_state.correct_count = correct_count
             st.session_state.points = points
 
-            # Almacenar resultados
-            new_result = {
-                'Fecha y hora': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                'Usuario': st.session_state.user,
-                'Email': st.session_state.email,
-                'Dificultad': st.session_state.difficulty,
-                'Temática': st.session_state.theme,
-                'Cantidad de respuestas correctas': correct_count,
-                'Puntos': points
-            }
-            results_df = pd.read_csv(resultado_path)
-            results_df = pd.concat([results_df, pd.DataFrame([new_result])], ignore_index=True)
-            results_df.to_csv(resultado_path, index=False)
-
-            st.write("Resultados guardados exitosamente.")
             st.session_state.step = 'completed'
             st.rerun()
 
     if st.session_state.step == 'completed':
+        # Almacenar resultados
+        new_result = {
+            'Fecha y hora': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'Usuario': st.session_state.user,
+            'Email': st.session_state.email,
+            'Dificultad': st.session_state.difficulty,
+            'Temática': st.session_state.theme,
+            'Cantidad de respuestas correctas': st.session_state.correct_count,
+            'Puntos': st.session_state.points
+            }
+        results_df = pd.read_csv(resultado_path)
+        results_df = pd.concat([results_df, pd.DataFrame([new_result])], ignore_index=True)
+        results_df.to_csv(resultado_path, index=False)
+        
         st.write(
             f"Juego completado. Respuestas correctas: {st.session_state.correct_count}. "
             f"Puntos obtenidos: {st.session_state.points}."
         )
+        
         st.write("Puede ver los datos de su última partida al final del Ranking.")
         col1, col2 = st.columns(2)
 
