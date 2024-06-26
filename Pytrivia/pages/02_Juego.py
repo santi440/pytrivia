@@ -28,7 +28,7 @@ if 'questions' not in st.session_state:
     st.session_state.questions = []
 
 if 'user_answers' not in st.session_state:
-    st.session_state.user_answers = []
+    st.session_state.user_answers = [(None, None)] * 5
 
 if 'step' not in st.session_state:
     st.session_state.step = 'start'
@@ -50,7 +50,6 @@ if 'email' not in st.session_state:
 
 if Sesiones.is_user_logged_in():
     if st.session_state.step == 'start':
-        #Se guarda en la variable user el nombre del usuario y se saluda. 
         user = st.session_state.user
         st.write(f"¿Estás listo para jugar {user}?")
 
@@ -85,7 +84,7 @@ if Sesiones.is_user_logged_in():
             st.session_state.theme = theme
             st.session_state.difficulty = difficulty
             st.session_state.questions = gen.generate_questions(theme)
-            st.session_state.user_answers = []
+            st.session_state.user_answers = [(None, None)] * 5
             st.session_state.step = 'playing'
             st.rerun()
 
@@ -108,16 +107,12 @@ if Sesiones.is_user_logged_in():
                     hint = gen.generate_hint(correct_answer, st.session_state.difficulty)
                     st.write(f"Pista: {hint}")
 
-
             # Guardo todas las respuestas en una variable. (Para poder hacerlo en el for utilizo el parametro opcional "key").
             user_answer = st.text_input(f"Respuesta a la pregunta {i + 1}:", key=f"answer_{i}")
             
-            # Este if permite que cada respuesta quede matcheada con su pregunta sin importar si una pregunta queda sin responder.
+            # Actualiza la respuesta del usuario en la lista pre-inicializada
             if user_answer:
-                if len(st.session_state.user_answers) < i + 1:
-                    st.session_state.user_answers.append((user_answer, correct_answer))
-                else:
-                    st.session_state.user_answers[i] = (user_answer, correct_answer)
+                st.session_state.user_answers[i] = (user_answer, correct_answer)
 
         if st.button("Enviar respuestas"):
             correct_count, points = gen.check_points(
