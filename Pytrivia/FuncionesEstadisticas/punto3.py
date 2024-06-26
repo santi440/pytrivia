@@ -9,7 +9,13 @@ def grafico_dias(game):
              
         Returns:
                 None"""
+                
     df = pd.read_csv(game)
+    
+    # Revisa si tiene informacion el DataFrame e imprime si esta vacio
+    if df.empty:
+        st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
+        return
     
     #Convierto el campo Fecha y hora a un tipo de dato de pandas 
     df['Fecha y hora'] = pd.to_datetime (df['Fecha y hora'])
