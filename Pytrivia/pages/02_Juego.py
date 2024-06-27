@@ -28,7 +28,7 @@ if 'questions' not in st.session_state:
     st.session_state.questions = []
 
 if 'user_answers' not in st.session_state:
-    st.session_state.user_answers = [(None, None) * 5]
+    st.session_state.user_answers = [(None, None)] * 5
 
 if 'step' not in st.session_state:
     st.session_state.step = 'start'
