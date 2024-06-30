@@ -63,7 +63,7 @@ def graph_airport_size (df_airports):
     # Reemplazar los valores de la columna 'type'
     df_airports['type'] = df_airports['type'].replace(type_mapping)
     df_airports = df_airports.groupby('type').size()
-    df_airports.plot(kind='pie', autopct='%1.1f%%', title='Tamaño de aeropuertos')
+    df_airports.plot(kind='pie', autopct='%1.1f%%', title='Tipo de aeropuertos')
     
     st.pyplot(plt.gcf())
 

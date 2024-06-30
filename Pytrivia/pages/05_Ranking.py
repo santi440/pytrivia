@@ -17,8 +17,8 @@ df_filtrado = df_filtrado.sort_values(by='Puntos', ascending=False).reset_index(
 df_filtrado['Posición'] = df_filtrado.index + 1
     
 st.header("Los mejores 15 jugadores")
-df_filtrado_display = df_filtrado.head(15).set_index('Posición')
-st.table(df_filtrado_display)
+df_filtrado_display = df_filtrado.head(15).set_index('Posición') 
+st.table(df_filtrado_display) # La posición se muesta como el índice del DataFrame
 
 
 user = Sesiones.get_logged_in_user()
@@ -38,14 +38,16 @@ if st.session_state.get('step') == 'completed':
     answers = st.session_state['user_answers']
 
     if answers:
-        # Crear un DataFrame con las respuestas y las respuestas correctas
-        data = {
-            'Pregunta': [f"Pregunta {i + 1}" for i in range(len(answers))],
-            'Tu Respuesta': [answer for answer, correct_answer in answers],
-            'Respuesta Correcta': [correct_answer for answer, correct_answer in answers]
-        }
-        df = pd.DataFrame(data)
-        
-        # Mostrar la tabla de las respuestas
-        st.write("Respuestas de la última partida:")
-        st.table(df)
+
+        for i, (question, correct_answer) in enumerate(st.session_state.questions):
+            st.write(f"Pregunta {i + 1}:")
+            st.write(question)
+    
+            if i < len(st.session_state.user_answers):
+                answer = st.session_state.user_answers[i][0]
+                st.write(f'Tu Respuesta: {answer}')
+                st.write(f'Respuesta Correcta: {correct_answer}')
+                st.write('-----------------------------------------------------------------------------------------')
+
+    st.subheader('Tu posición actual en el ranking')
+    st.table(df_filtrado[df_filtrado['Email'] == st.session_state.email].set_index('Posición')) # La posición se muesta como el índice del DataFrame

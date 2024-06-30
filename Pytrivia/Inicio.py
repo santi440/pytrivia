@@ -41,9 +41,9 @@ st.write(f"""
 st.header("Funcionamiento del Parámetro Dificultad")
 st.write("""
     En PyTrivia, podés ajustar la dificultad del juego según tu nivel de conocimiento:
-    - **Fácil**: Preguntas más sencillas para un calentamiento.
-    - **Intermedio**: Preguntas de dificultad media para jugadores con conocimientos generales.
-    - **Difícil**: Preguntas desafiantes para expertos.
+    - **Fácil:** Se proporciona una pista detallada.  
+    - **Media:** Se proporciona una pista general.  
+    - **Alta:** No se proporciona ninguna pista.
     
     La dificultad afecta tanto la complejidad de las preguntas como la cantidad de puntos que podés ganar.
     Además, podés elejir la temática de las preguntas:
@@ -51,6 +51,11 @@ st.write("""
          - **Lagos**
          - **Conectividad**
          - **Último Censo (2022)**
+
+    El parámetro de dificultad en la temática de Conectividad funciona de manera diferente:
+    - **Fácil:** Tienes 5 minutos para responder.  
+    - **Media:** Tienes 3 minutos para responder.    
+    - **Alta:** Tienes 1 minuto para responder.
     """)
 
 st.header("Detalles Adicionales")
