@@ -22,7 +22,6 @@ def graficar_porcentaje(game):
     
     #Nueva columna Supera_media con el resultado de la mascara
     df_result['Supera_media'] = df_result["Puntos"] >= percentile_50
-    print(df_result.info())
     
     # Cuenta el numero de usuarios para las categorias si supera o no (primer valor siempre falso)
     category_counts = df_result['Supera_media'].value_counts()
