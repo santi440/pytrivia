@@ -113,6 +113,8 @@ def filter_dataframe(df, theme):
             "Varones Total de población"
         ]
     }
+    if theme == "Lagos":
+        df['Nombre'] = df['Nombre'].str[5:]
     return df.dropna(subset=columns_to_check[theme])
 
 def get_random_row(df, used_rows):
