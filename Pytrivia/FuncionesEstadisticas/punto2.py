@@ -1,5 +1,5 @@
 import streamlit as st
-import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 import pandas as pd
 
 def graficar_porcentaje(game): 
@@ -12,6 +12,7 @@ def graficar_porcentaje(game):
     """
     df_result = pd.read_csv(game)
     # Revisa si tiene informacion el DataFrame e imprime si esta vacio
+    
     if df_result.empty:
         st.write("Todavía no hay información sobre partidas. ¡Juega y luego podrás ver tus estadísticas!")
         return
@@ -19,15 +20,15 @@ def graficar_porcentaje(game):
     # Calcular los percentiles
     percentile_50 = df_result["Puntos"].quantile(0.5)
     
-    #percentile_50 = df_result.loc['50%', 'Puntos']
-    great_players = df_result[df_result["Puntos"] >= percentile_50] 
+    #Nueva columna Supera_media con el resultado de la mascara
+    df_result['Supera_media'] = df_result["Puntos"] >= percentile_50
+    print(df_result.info())
     
-    # Configurar los datos para el gráfico de torta
-    labels_players = great_players['Usuario']
-    values_players = great_players['Puntos']
+    # Cuenta el numero de usuarios para las categorias si supera o no (primer valor siempre falso)
+    category_counts = df_result['Supera_media'].value_counts()
     
-    #hoverinfo para que se vea el porcentaje al pasar por encima 
-    fig_pie = go.Figure(data=[go.Pie(labels=labels_players, values=values_players, hole=0.3,hoverinfo="label+value")])
-    fig_pie.update_layout(title="Partidas que superan la media")
-    
-    st.plotly_chart(fig_pie)
+    #Grafico con formato para que quede mas estilizado
+    plt.figure(figsize=(8, 8))
+    plt.pie(category_counts,labels=['No superan la media','Superan la media'],autopct='%1.1f%%',startangle=140, colors=['#ff9999','#66b3ff'])
+    plt.title('Distribución de usuarios según si superan al media de puntos')
+    st.pyplot(plt.gcf())
