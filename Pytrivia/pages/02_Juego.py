@@ -48,6 +48,9 @@ if 'end_time' not in st.session_state:
 if 'email' not in st.session_state:
     st.session_state.email = None
 
+if 'result_saved' not in st.session_state:
+    st.session_state.result_saved = False
+
 if Sesiones.is_user_logged_in():
     if st.session_state.step == 'start':
         user = st.session_state.user
@@ -85,6 +88,7 @@ if Sesiones.is_user_logged_in():
             st.session_state.difficulty = difficulty
             st.session_state.questions = gen.generate_questions(theme)
             st.session_state.step = 'playing'
+            st.session_state.result_saved = False
             st.rerun()
 
         if st.button('Cerrar Sesión'):
@@ -127,18 +131,20 @@ if Sesiones.is_user_logged_in():
 
     if st.session_state.step == 'completed':
         # Almacenar resultados
-        new_result = {
-            'Fecha y hora': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            'Usuario': st.session_state.user,
-            'Email': st.session_state.email,
-            'Dificultad': st.session_state.difficulty,
-            'Temática': st.session_state.theme,
-            'Cantidad de respuestas correctas': st.session_state.correct_count,
-            'Puntos': st.session_state.points
+        if (not st.session_state.result_saved):
+            new_result = {
+                'Fecha y hora': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                'Usuario': st.session_state.user,
+                'Email': st.session_state.email,
+                'Dificultad': st.session_state.difficulty,
+                'Temática': st.session_state.theme,
+                'Cantidad de respuestas correctas': st.session_state.correct_count,
+                'Puntos': st.session_state.points
             }
-        results_df = pd.read_csv(resultado_path)
-        results_df = pd.concat([results_df, pd.DataFrame([new_result])], ignore_index=True)
-        results_df.to_csv(resultado_path, index=False)
+            new_result_df = pd.DataFrame([new_result])
+            new_result_df.to_csv(resultado_path, mode='a', header=False, index=False)
+
+            st.session_state.result_saved = True
         
         st.write(
             f"Juego completado. Respuestas correctas: {st.session_state.correct_count}. "
