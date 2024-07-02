@@ -16,7 +16,7 @@ def login_form():
             # Obtener el email asociado al usuario seleccionado
             email = df_user.loc[df_user['Usuario'] == usuario_seleccionado, 'Email'].iloc[0]
             st.session_state.email = email
-            st.session_state.usuer = usuario_seleccionado
+            st.session_state.user = usuario_seleccionado
             st.success(f"¡Inicio de sesión exitoso como {usuario_seleccionado}!")
             st.rerun()
         except IndexError:
