@@ -145,13 +145,15 @@ def generate_question(row, theme):
     Returns:
     - Tuple: (Pregunta, Respuesta correcta).
     """
-    question_generators = {
-        "Aeropuertos": generar_pregunta_aeropuertos,
-        "Lagos": generar_pregunta_lagos,
-        "Conectividad": generar_pregunta_conectividad,
-        "Censo 2022": generar_pregunta_censo
-    }
-    return question_generators[theme](row)
+    match theme:
+        case "Aeropuertos":
+            return generar_pregunta_aeropuertos(row)
+        case "Lagos":
+            return generar_pregunta_lagos(row)
+        case "Conectividad":
+            return generar_pregunta_conectividad(row)
+        case "Censo 2022":
+            return generar_pregunta_censo(row)
 
 def generar_pregunta_aeropuertos(row):
     """
